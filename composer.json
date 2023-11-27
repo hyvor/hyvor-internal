@@ -1,0 +1,28 @@
+{
+    "name": "hyvor/hyvor-helper-laravel",
+    "description": "Helper Package for HYVOR Applications",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Hyvor\\Helper\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Supun",
+            "email": "supun@hyvor.com"
+        }
+    ],
+    "require-dev": {
+        "orchestra/testbench": "^8.0",
+        "phpstan/phpstan": "^1.10"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Hyvor\\Helper\\Login\\LoginServiceProvider"
+            ]
+        }
+    }
+}
