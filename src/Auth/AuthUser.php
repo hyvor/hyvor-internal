@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Hyvor\Helper\Login;
+namespace Hyvor\Helper\Auth;
 
 /**
  * @phpstan-type LoginUserArray array{
@@ -27,9 +27,8 @@ namespace Hyvor\Helper\Login;
  * sub?: string,
  * }
  */
-class LoginUser
+class AuthUser
 {
-
 
     public function __construct(
         public int $id,
@@ -63,5 +62,10 @@ class LoginUser
         );
     }
 
+
+    public static function fromId(int $id) : self
+    {
+
+    }
 
 }

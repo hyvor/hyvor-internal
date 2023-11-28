@@ -1,8 +1,8 @@
 <?php
 
-namespace Hyvor\Helper\Login\Providers;
+namespace Hyvor\Helper\Auth\Providers;
 
-use Hyvor\Helper\Login\LoginUser;
+use Hyvor\Helper\Auth\AuthUser;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Collection;
@@ -10,31 +10,31 @@ use Illuminate\Support\Collection;
 interface ProviderInterface
 {
 
-    public function check() : false|LoginUser;
+    public function check() : false|AuthUser;
 
     public function login() : RedirectResponse|Redirector;
     public function signup() : RedirectResponse|Redirector;
     public function logout() : RedirectResponse|Redirector;
 
     /**
-     * @param iterable<string> $ids
-     * @return Collection<int, LoginUser>
+     * @param iterable<int> $ids
+     * @return Collection<int, AuthUser>
      */
     public function fromIds(iterable $ids);
-    public function fromId(int $id) : ?LoginUser;
+    public function fromId(int $id) : ?AuthUser;
 
     /**
      * @param iterable<string> $emails
-     * @return Collection<int, LoginUser>
+     * @return Collection<int, AuthUser>
      */
     public function fromEmails(iterable $emails);
-    public function fromEmail(string $email) : ?LoginUser;
+    public function fromEmail(string $email) : ?AuthUser;
 
     /**
      * @param iterable<string> $usernames
-     * @return Collection<int, LoginUser>
+     * @return Collection<int, AuthUser>
      */
     public function fromUsernames(iterable $usernames);
-    public function fromUsername(string $username) : ?LoginUser;
+    public function fromUsername(string $username) : ?AuthUser;
 
 }

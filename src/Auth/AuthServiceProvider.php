@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Hyvor\Login;
+namespace Hyvor\Helper\Auth;
 
 use Illuminate\Support\ServiceProvider;
 
-class LoginServiceProvider extends ServiceProvider
+class AuthServiceProvider extends ServiceProvider
 {
     public function boot()
     {

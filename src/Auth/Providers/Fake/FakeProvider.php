@@ -1,16 +1,16 @@
 <?php
 
-namespace Hyvor\Helper\Login\Providers\Fake;
+namespace Hyvor\Helper\Auth\Providers\Fake;
 
-use Hyvor\Helper\Login\LoginUser;
-use Hyvor\Helper\Login\Providers\ProviderInterface;
+use Faker\Factory;
+use Hyvor\Helper\Auth\AuthUser;
+use Hyvor\Helper\Auth\Providers\ProviderInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
-use Faker\Factory;
 use Illuminate\Support\Collection;
 
 /**
- * @phpstan-import-type LoginUserArrayPartial from LoginUser
+ * @phpstan-import-type LoginUserArrayPartial from AuthUser
  */
 class FakeProvider implements ProviderInterface
 {
@@ -19,11 +19,11 @@ class FakeProvider implements ProviderInterface
      * If $DATABASE is set, users will be searched (in fromX() methods) from this collection
      * Results will only be returned if the search is matched
      * If it is not set, all users will always be matched using fake data (for testing)
-     * @var Collection<int, LoginUser>|null
+     * @var Collection<int, AuthUser>|null
      */
     public static ?Collection $DATABASE = null;
 
-    public function check() : false|LoginUser
+    public function check() : false|AuthUser
     {
         if ($this->getFakeUserId()) {
             return $this->fakeLoginUser();
@@ -46,39 +46,39 @@ class FakeProvider implements ProviderInterface
 
     /**
      * @param iterable<string> $ids
-     * @return Collection<int, LoginUser>
+     * @return Collection<int, AuthUser>
      */
     public function fromIds(iterable $ids)
     {
         return collect([]);
     }
-    public function fromId(int $id) : ?LoginUser
+    public function fromId(int $id) : ?AuthUser
     {
         return $this->singleSearch('id', $id);
     }
 
     /**
      * @param iterable<string> $emails
-     * @return Collection<int, LoginUser>
+     * @return Collection<int, AuthUser>
      */
     public function fromEmails(iterable $emails)
     {
         return collect([]);
     }
-    public function fromEmail(string $email) : ?LoginUser
+    public function fromEmail(string $email) : ?AuthUser
     {
         return $this->singleSearch('email', $email);
     }
 
     /**
      * @param iterable<string> $usernames
-     * @return Collection<int, LoginUser>
+     * @return Collection<int, AuthUser>
      */
     public function fromUsernames(iterable $usernames)
     {
         return collect([]);
     }
-    public function fromUsername(string $username) : ?LoginUser
+    public function fromUsername(string $username) : ?AuthUser
     {
         return $this->singleSearch('username', $username);
     }
@@ -97,10 +97,10 @@ class FakeProvider implements ProviderInterface
     /**
      * @param LoginUserArrayPartial $fill
      */
-    public static function fakeLoginUser(array $fill = []) : LoginUser
+    public static function fakeLoginUser(array $fill = []) : AuthUser
     {
         $faker = Factory::create();
-        return LoginUser::fromArray(array_merge([
+        return AuthUser::fromArray(array_merge([
             'id' => self::getFakeUserId() ?? $faker->randomNumber(),
             'username' => $faker->name(),
             'name' => $faker->name(),
@@ -112,7 +112,7 @@ class FakeProvider implements ProviderInterface
     /**
      * @param 'id' | 'username' | 'email' $key
      */
-    private function singleSearch(string $key, string|int $value) : ?LoginUser
+    private function singleSearch(string $key, string|int $value) : ?AuthUser
     {
         if ($this->getFakeUserId()) {
             // @phpstan-ignore-next-line
@@ -124,13 +124,13 @@ class FakeProvider implements ProviderInterface
     }
 
     /**
-     * @param iterable<int, LoginUser|LoginUserArrayPartial> $users
+     * @param iterable<int, AuthUser|LoginUserArrayPartial> $users
      */
     public static function databaseSet(iterable $users) : void
     {
         self::$DATABASE = collect($users)
             ->map(function ($user) {
-                if ($user instanceof LoginUser) {
+                if ($user instanceof AuthUser) {
                     return $user;
                 }
                 return self::fakeLoginUser($user);
@@ -143,7 +143,7 @@ class FakeProvider implements ProviderInterface
     }
 
     /**
-     * @param LoginUser|LoginUserArrayPartial $user
+     * @param AuthUser|LoginUserArrayPartial $user
      */
     public static function databaseAdd($user) : void
     {
@@ -151,7 +151,7 @@ class FakeProvider implements ProviderInterface
             self::$DATABASE = collect([]);
         }
         self::$DATABASE->push(
-            $user instanceof LoginUser ? $user : self::fakeLoginUser($user)
+            $user instanceof AuthUser ? $user : self::fakeLoginUser($user)
         );
     }
 

@@ -1,8 +1,10 @@
 <?php
 
-namespace Hyvor\Login;
+namespace Hyvor\Helper\Auth;
 
-class Login
+use Hyvor\Login\User;
+
+class Auth
 {
 
     public function __construct()
