@@ -1,5 +1,5 @@
 {
-    "name": "hyvor/hyvor-helper-laravel",
+    "name": "hyvor/helper-laravel",
     "description": "Helper Package for HYVOR Applications",
     "type": "library",
     "license": "MIT",

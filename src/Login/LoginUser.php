@@ -14,6 +14,18 @@ namespace Hyvor\Helper\Login;
  *  website_url?: string,
  *  sub?: string,
  * }
+ *
+ * @phpstan-type LoginUserArrayPartial array{
+ * id?: int,
+ * username?: string,
+ * name?: string,
+ * email?: string,
+ * picture_url?: string,
+ * location?: string,
+ * bio?: string,
+ * website_url?: string,
+ * sub?: string,
+ * }
  */
 class LoginUser
 {

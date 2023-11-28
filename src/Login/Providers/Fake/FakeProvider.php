@@ -9,18 +9,19 @@ use Illuminate\Routing\Redirector;
 use Faker\Factory;
 use Illuminate\Support\Collection;
 
+/**
+ * @phpstan-import-type LoginUserArrayPartial from LoginUser
+ */
 class FakeProvider implements ProviderInterface
 {
 
-
     /**
-     * If $FAKE is set, users will be searched (in fromX() methods) from this collection
+     * If $DATABASE is set, users will be searched (in fromX() methods) from this collection
      * Results will only be returned if the search is matched
-     * If it is not set, all users will be matched always using fake data (for testing)
+     * If it is not set, all users will always be matched using fake data (for testing)
      * @var Collection<int, LoginUser>|null
      */
-    public static ?Collection $FAKE = null;
-
+    public static ?Collection $DATABASE = null;
 
     public function check() : false|LoginUser
     {
@@ -84,7 +85,7 @@ class FakeProvider implements ProviderInterface
 
     
 
-    private function getFakeUserId() : ?int
+    public static function getFakeUserId() : ?int
     {
         $id = config('hyvor-helper.login.fake.user_id');
         if (is_int($id)) {
@@ -94,14 +95,13 @@ class FakeProvider implements ProviderInterface
     }
 
     /**
-     * @param array<string, mixed> $fill
+     * @param LoginUserArrayPartial $fill
      */
-    private function fakeLoginUser(array $fill = []) : LoginUser
+    public static function fakeLoginUser(array $fill = []) : LoginUser
     {
         $faker = Factory::create();
-        // @phpstan-ignore-next-line
         return LoginUser::fromArray(array_merge([
-            'id' => $this->getFakeUserId() ?? $faker->randomNumber(),
+            'id' => self::getFakeUserId() ?? $faker->randomNumber(),
             'username' => $faker->name(),
             'name' => $faker->name(),
             'email' => $faker->email(),
@@ -109,14 +109,50 @@ class FakeProvider implements ProviderInterface
         ], $fill));
     }
 
+    /**
+     * @param 'id' | 'username' | 'email' $key
+     */
     private function singleSearch(string $key, string|int $value) : ?LoginUser
     {
         if ($this->getFakeUserId()) {
-            return $this->fakeLoginUser([
+            // @phpstan-ignore-next-line
+            return self::fakeLoginUser([
                 $key => $value,
             ]);
         }
         return null;
+    }
+
+    /**
+     * @param iterable<int, LoginUser|LoginUserArrayPartial> $users
+     */
+    public static function databaseSet(iterable $users) : void
+    {
+        self::$DATABASE = collect($users)
+            ->map(function ($user) {
+                if ($user instanceof LoginUser) {
+                    return $user;
+                }
+                return self::fakeLoginUser($user);
+            });
+    }
+
+    public static function databaseClear() : void
+    {
+        self::$DATABASE = null;
+    }
+
+    /**
+     * @param LoginUser|LoginUserArrayPartial $user
+     */
+    public static function databaseAdd($user) : void
+    {
+        if (self::$DATABASE === null) {
+            self::$DATABASE = collect([]);
+        }
+        self::$DATABASE->push(
+            $user instanceof LoginUser ? $user : self::fakeLoginUser($user)
+        );
     }
 
 }
