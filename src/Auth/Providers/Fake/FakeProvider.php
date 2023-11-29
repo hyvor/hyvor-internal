@@ -45,12 +45,12 @@ class FakeProvider implements ProviderInterface
     }
 
     /**
-     * @param iterable<string> $ids
+     * @param iterable<int> $ids
      * @return Collection<int, AuthUser>
      */
     public function fromIds(iterable $ids)
     {
-        return collect([]);
+        return $this->multiSearch('id', $ids);
     }
     public function fromId(int $id) : ?AuthUser
     {
@@ -63,7 +63,7 @@ class FakeProvider implements ProviderInterface
      */
     public function fromEmails(iterable $emails)
     {
-        return collect([]);
+        return $this->multiSearch('email', $emails);
     }
     public function fromEmail(string $email) : ?AuthUser
     {
@@ -76,7 +76,7 @@ class FakeProvider implements ProviderInterface
      */
     public function fromUsernames(iterable $usernames)
     {
-        return collect([]);
+        return $this->multiSearch('username', $usernames);
     }
     public function fromUsername(string $username) : ?AuthUser
     {
@@ -114,19 +114,39 @@ class FakeProvider implements ProviderInterface
      */
     private function singleSearch(string $key, string|int $value) : ?AuthUser
     {
-        if ($this->getFakeUserId()) {
-            // @phpstan-ignore-next-line
-            return self::fakeLoginUser([
-                $key => $value,
-            ]);
+        if (self::$DATABASE !== null) {
+            return self::$DATABASE->firstWhere($key, $value);
         }
-        return null;
+
+        // @phpstan-ignore-next-line
+        return self::fakeLoginUser([$key => $value]);
+    }
+
+    /**
+     * @param string $key
+     * @param iterable<int|string> $values
+     * @return Collection<int, AuthUser>
+     */
+    private function multiSearch(string $key, iterable $values) : Collection
+    {
+        if (self::$DATABASE !== null) {
+            return self::$DATABASE->whereIn($key, $values)
+                ->keyBy($key);
+        }
+
+        // @phpstan-ignore-next-line
+        return collect($values)
+            ->map(function ($value) use ($key) {
+                // @phpstan-ignore-next-line
+                return self::fakeLoginUser([$key => $value]);
+            })
+            ->keyBy($key);
     }
 
     /**
      * @param iterable<int, AuthUser|LoginUserArrayPartial> $users
      */
-    public static function databaseSet(iterable $users) : void
+    public static function databaseSet(iterable $users = []) : void
     {
         self::$DATABASE = collect($users)
             ->map(function ($user) {

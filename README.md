@@ -63,9 +63,9 @@ it('adds names to the email', function() {
 - `FakeProvider::databaseAdd($user)` - adds a user to the database.
 - `FakeProvider::databaseClear()` - clears the database. This should be called after each test case (tearDown).
 
-When a database is set, the `FakeProvider` will return the user data from the database only. This is useful for testing the following scenarios:
+When a database is set, the `FakeProvider` will return the user data from that database only. This is useful for testing the following scenarios:
 
-- When a user is not found (without the database, the Fake provider will ALWAYS return dummy data)
+- When a user is not found (set an empty database).
 - When a user's specific details are needed (e.g. name, email, etc.) as in the above example.
 
 In most other cases, you should be able to use the Fake provider without setting a database. Because it automatically generates dummy data for all users, you do not need to seed a database before each test case. However, note that user's data will be different for each test case.
