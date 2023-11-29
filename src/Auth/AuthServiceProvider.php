@@ -12,6 +12,6 @@ class AuthServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'hyvor-helper');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/config.php', 'hyvor-helper');
     }
 }

@@ -83,8 +83,6 @@ class FakeProvider implements ProviderInterface
         return $this->singleSearch('username', $username);
     }
 
-    
-
     public static function getFakeUserId() : ?int
     {
         $id = config('hyvor-helper.login.fake.user_id');
@@ -155,6 +153,14 @@ class FakeProvider implements ProviderInterface
                 }
                 return self::fakeLoginUser($user);
             });
+    }
+
+    /**
+     * @return Collection<int, AuthUser>|null
+     */
+    public static function databaseGet() : ?Collection
+    {
+        return self::$DATABASE;
     }
 
     public static function databaseClear() : void

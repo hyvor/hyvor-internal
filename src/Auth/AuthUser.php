@@ -2,6 +2,8 @@
 
 namespace Hyvor\Helper\Auth;
 
+use Hyvor\Helper\Auth\Providers\CurrentProvider;
+
 /**
  * @phpstan-type LoginUserArray array{
  *  id: int,
@@ -65,7 +67,19 @@ class AuthUser
 
     public static function fromId(int $id) : self
     {
-
+          return CurrentProvider::get()->fromId($id);
     }
+
+    public static function fromUsername(string $username) : self
+    {
+          return CurrentProvider::get()->fromUsername($username);
+    }
+
+    public static function fromEmail(string $email) : self
+    {
+          return CurrentProvider::get()->fromEmail($email);
+    }
+
+
 
 }
