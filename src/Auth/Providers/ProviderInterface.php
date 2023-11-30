@@ -25,14 +25,14 @@ interface ProviderInterface
 
     /**
      * @param iterable<string> $emails
-     * @return Collection<int, AuthUser>
+     * @return Collection<string, AuthUser>
      */
     public function fromEmails(iterable $emails);
     public function fromEmail(string $email) : ?AuthUser;
 
     /**
      * @param iterable<string> $usernames
-     * @return Collection<int, AuthUser>
+     * @return Collection<string, AuthUser>
      */
     public function fromUsernames(iterable $usernames);
     public function fromUsername(string $username) : ?AuthUser;

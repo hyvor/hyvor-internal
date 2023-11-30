@@ -2,7 +2,7 @@
 
 return [
 
-    'login' => [
+    'auth' => [
 
         /**
          * Login provider to use
@@ -21,18 +21,22 @@ return [
              * HYVOR Public URL
              * Users are redirected to this URL to login/signup
              */
-            'url' => env('LOGIN_HYVOR_URL'),
+            'url' => env('LOGIN_HYVOR_URL', 'https://hyvor.com'),
 
             /**
              * HYVOR Private URL (for internal API calls)
              * This is only required if you have HYVOR running on a private network
+             * ex: http://0.0.0.1
              */
-            'private_url' => env('LOGIN_HYVOR_PRIVATE_URL', env('LOGIN_HYVOR_URL')),
+            'private_url' => env(
+                'LOGIN_HYVOR_PRIVATE_URL',
+                env('LOGIN_HYVOR_URL', 'https://hyvor.com')
+            ),
 
             /**
              * HYVOR API Key
              */
-            'api_key' => env('LOGIN_HYVOR_API_KEY'),
+            'api_key' => env('LOGIN_HYVOR_API_KEY', 'test-key'),
         ],
 
         /**

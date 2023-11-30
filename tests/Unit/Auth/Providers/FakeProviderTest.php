@@ -13,10 +13,10 @@ beforeEach(function () {
 it('check() based on user ID config', function () {
     expect($this->provider->check()->id)->toBe(1);
 
-    config(['hyvor-helper.login.fake.user_id' => 2]);
+    config(['hyvor-helper.auth.fake.user_id' => 2]);
     expect($this->provider->check()->id)->toBe(2);
 
-    config(['hyvor-helper.login.fake.user_id' => null]);
+    config(['hyvor-helper.auth.fake.user_id' => null]);
     expect($this->provider->check())->toBeFalse();
 });
 
