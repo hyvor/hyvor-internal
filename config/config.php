@@ -11,7 +11,7 @@ return [
          * - oidc: OpenID Connect (requires an OIDC provider)
          * - fake: Fake login (for testing)
          */
-        'provider' => env('LOGIN_PROVIDER', 'hyvor'),
+        'provider' => env('LOGIN_PROVIDER', 'fake'),
 
         /**
          * Hyvor Login settings
