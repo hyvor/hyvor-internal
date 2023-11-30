@@ -13,51 +13,51 @@ class OidcProvider implements ProviderInterface
 
     public function check(): false|AuthUser
     {
-        // TODO: Implement check() method.
+        return false;
     }
 
     public function login(): RedirectResponse|Redirector
     {
-        // TODO: Implement login() method.
+        return redirect('');
     }
 
     public function signup(): RedirectResponse|Redirector
     {
-        // TODO: Implement signup() method.
+        return redirect('');
     }
 
     public function logout(): RedirectResponse|Redirector
     {
-        // TODO: Implement logout() method.
+        return redirect('');
     }
 
     public function fromIds(iterable $ids)
     {
-        // TODO: Implement fromIds() method.
+        return collect([]);
     }
 
     public function fromId(int $id): ?AuthUser
     {
-        // TODO: Implement fromId() method.
+        return null;
     }
 
     public function fromEmails(iterable $emails)
     {
-        // TODO: Implement fromEmails() method.
+        return collect([]);
     }
 
     public function fromEmail(string $email): ?AuthUser
     {
-        // TODO: Implement fromEmail() method.
+        return null;
     }
 
     public function fromUsernames(iterable $usernames)
     {
-        // TODO: Implement fromUsernames() method.
+        return collect([]);
     }
 
     public function fromUsername(string $username): ?AuthUser
     {
-        // TODO: Implement fromUsername() method.
+        return null;
     }
 }

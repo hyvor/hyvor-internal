@@ -59,7 +59,7 @@ class FakeProvider implements ProviderInterface
 
     /**
      * @param iterable<string> $emails
-     * @return Collection<int, AuthUser>
+     * @return Collection<string, AuthUser>
      */
     public function fromEmails(iterable $emails)
     {
@@ -72,7 +72,7 @@ class FakeProvider implements ProviderInterface
 
     /**
      * @param iterable<string> $usernames
-     * @return Collection<int, AuthUser>
+     * @return Collection<string, AuthUser>
      */
     public function fromUsernames(iterable $usernames)
     {
@@ -121,9 +121,9 @@ class FakeProvider implements ProviderInterface
     }
 
     /**
-     * @param string $key
-     * @param iterable<int|string> $values
-     * @return Collection<int, AuthUser>
+     * @template T of int|string
+     * @param iterable<T> $values
+     * @return Collection<T, AuthUser>
      */
     private function multiSearch(string $key, iterable $values) : Collection
     {
