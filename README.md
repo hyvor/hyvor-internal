@@ -20,7 +20,44 @@ This library supports the following authentication providers:
 
 ### Configuration
 
-To be written...
+The following environment variables are supported:
+
+<table>
+    <tr>
+        <td>ENV</td>
+        <td>Description</td>
+        <td>Default</td>
+    </tr>
+    <tr>
+        <td><code>AUTH_PROVIDER</code></td>
+        <td>The authentication provider. One of <code>hyvor</code>, <code>oidc</code>, or <code>fake</code>.</td>
+        <td><code>fake</code></td>
+    </tr>
+    <tr>
+        <td colspan="3" style="text-align:center">
+            <code>hyvor</code> provider
+        </td>
+    </tr>
+    <tr>
+        <td><code>AUTH_HYVOR_URL</code></td>
+        <td>Public URL of the HYVOR instance. Users are redirected here for login and signup</td>
+        <td><code>https://hyvor.com</code></td>
+    </tr>
+    <tr>
+        <td><code>AUTH_HYVOR_PRIVATE_URL</code></td>
+        <td>
+            If the HYVOR instance is on a private network, set this to the private URL. Otherwise, the public URL will be used.
+        </td>
+        <td><code>AUTH_HYVOR_URL</code></td>
+    </tr>
+    <tr>
+        <td><code>AUTH_HYVOR_API_KEY</code></td>
+        <td>
+            <strong>REQUIRED</strong>. The API key of the HYVOR instance. This is used to fetch user data.
+        </td>
+        <td><code>test-key</code></td>
+    </tr>
+</table>
 
 ### User Data
 

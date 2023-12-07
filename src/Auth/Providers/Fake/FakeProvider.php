@@ -10,7 +10,7 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Collection;
 
 /**
- * @phpstan-import-type LoginUserArrayPartial from AuthUser
+ * @phpstan-import-type AuthUserArrayPartial from AuthUser
  */
 class FakeProvider implements ProviderInterface
 {
@@ -93,7 +93,7 @@ class FakeProvider implements ProviderInterface
     }
 
     /**
-     * @param LoginUserArrayPartial $fill
+     * @param AuthUserArrayPartial $fill
      */
     public static function fakeLoginUser(array $fill = []) : AuthUser
     {
@@ -142,7 +142,7 @@ class FakeProvider implements ProviderInterface
     }
 
     /**
-     * @param iterable<int, AuthUser|LoginUserArrayPartial> $users
+     * @param iterable<int, AuthUser|AuthUserArrayPartial> $users
      */
     public static function databaseSet(iterable $users = []) : void
     {
@@ -169,7 +169,7 @@ class FakeProvider implements ProviderInterface
     }
 
     /**
-     * @param AuthUser|LoginUserArrayPartial $user
+     * @param AuthUser|AuthUserArrayPartial $user
      */
     public static function databaseAdd($user) : void
     {

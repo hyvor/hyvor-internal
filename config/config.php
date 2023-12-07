@@ -11,7 +11,7 @@ return [
          * - oidc: OpenID Connect (requires an OIDC provider)
          * - fake: Fake login (for testing)
          */
-        'provider' => env('LOGIN_PROVIDER', 'fake'),
+        'provider' => env('AUTH_PROVIDER', 'fake'),
 
         /**
          * Hyvor Login settings
@@ -21,7 +21,7 @@ return [
              * HYVOR Public URL
              * Users are redirected to this URL to login/signup
              */
-            'url' => env('LOGIN_HYVOR_URL', 'https://hyvor.com'),
+            'url' => env('AUTH_HYVOR_URL', 'https://hyvor.com'),
 
             /**
              * HYVOR Private URL (for internal API calls)
@@ -29,14 +29,14 @@ return [
              * ex: http://0.0.0.1
              */
             'private_url' => env(
-                'LOGIN_HYVOR_PRIVATE_URL',
-                env('LOGIN_HYVOR_URL', 'https://hyvor.com')
+                'AUTH_HYVOR_PRIVATE_URL',
+                env('AUTH_HYVOR_URL', 'https://hyvor.com')
             ),
 
             /**
              * HYVOR API Key
              */
-            'api_key' => env('LOGIN_HYVOR_API_KEY', 'test-key'),
+            'api_key' => env('AUTH_HYVOR_API_KEY', 'test-key'),
         ],
 
         /**
@@ -46,24 +46,24 @@ return [
             /**
              * OpenID Connect Provider URL
              */
-            'provider_url' => env('LOGIN_OIDC_PROVIDER_URL'),
+            'provider_url' => env('AUTH_OIDC_PROVIDER_URL'),
 
             /**
              * Client ID
              */
-            'client_id' => env('LOGIN_OIDC_CLIENT_ID'),
+            'client_id' => env('AUTH_OIDC_CLIENT_ID'),
 
             /**
              * Client Secret
              */
-            'client_secret' => env('LOGIN_OIDC_CLIENT_SECRET'),
+            'client_secret' => env('AUTH_OIDC_CLIENT_SECRET'),
         ],
 
         'fake' => [
             /**
              * Fake user ID
              */
-            'user_id' => env('LOGIN_FAKE_USER_ID', 1),
+            'user_id' => env('AUTH_FAKE_USER_ID', 1),
         ]
 
     ]

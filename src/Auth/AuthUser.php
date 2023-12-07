@@ -6,7 +6,7 @@ use Hyvor\Helper\Auth\Providers\CurrentProvider;
 use Illuminate\Support\Collection;
 
 /**
- * @phpstan-type LoginUserArray array{
+ * @phpstan-type AuthUserArray array{
  *  id: int,
  *  username: string,
  *  name: string,
@@ -18,7 +18,7 @@ use Illuminate\Support\Collection;
  *  sub?: string,
  * }
  *
- * @phpstan-type LoginUserArrayPartial array{
+ * @phpstan-type AuthUserArrayPartial array{
  * id?: int,
  * username?: string,
  * name?: string,
@@ -48,7 +48,7 @@ class AuthUser
     {}
 
     /**
-     * @param LoginUserArray $data
+     * @param AuthUserArray $data
      */
     public static function fromArray(array $data) : self
     {

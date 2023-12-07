@@ -10,7 +10,7 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Collection;
 
 /**
- * @phpstan-import-type LoginUserArray from AuthUser
+ * @phpstan-import-type AuthUserArray from AuthUser
  */
 class HyvorProvider implements ProviderInterface
 {
@@ -31,7 +31,7 @@ class HyvorProvider implements ProviderInterface
         ]);
 
         if ($response->successful()) {
-            /** @var LoginUserArray $data */
+            /** @var AuthUserArray $data */
             $data = $response->json();
             return AuthUser::fromArray($data);
         }
@@ -93,7 +93,7 @@ class HyvorProvider implements ProviderInterface
         ]);
 
         if ($response->successful()) {
-            /** @var LoginUserArray[] $json */
+            /** @var AuthUserArray[] $json */
             $json = $response->json();
             $users = collect($json);
             return $users->map(fn($user) => AuthUser::fromArray($user));
