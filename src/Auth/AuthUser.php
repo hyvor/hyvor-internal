@@ -33,7 +33,7 @@ use Illuminate\Support\Collection;
 class AuthUser
 {
 
-    public function __construct(
+    final public function __construct(
         public int $id,
         public string $username,
         public string $name,
@@ -50,9 +50,9 @@ class AuthUser
     /**
      * @param AuthUserArray $data
      */
-    public static function fromArray(array $data) : self
+    public static function fromArray(array $data) : static
     {
-        return new self(
+        return new static(
             id: $data['id'],
             username: $data['username'],
             name: $data['name'],

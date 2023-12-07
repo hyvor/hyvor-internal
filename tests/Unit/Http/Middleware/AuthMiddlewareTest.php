@@ -22,6 +22,7 @@ it('sets access auth user when user is logged in', function() {
     $request = new Request();
     (new AuthMiddleware())->handle($request, function () {
         $user = app(AccessAuthUser::class);
+        expect($user)->toBeInstanceOf(AccessAuthUser::class);
         expect($user->id)->toBe(15);
     });
 
