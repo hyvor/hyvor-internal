@@ -76,7 +76,7 @@ class AuthUser
 
     public static function fromId(int $id) : ?self
     {
-          return CurrentProvider::getImplementation()->fromId($id);
+        return CurrentProvider::getImplementation()->fromId($id);
     }
 
     /**

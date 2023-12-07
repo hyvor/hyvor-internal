@@ -3,7 +3,6 @@
 namespace Hyvor\Helper\Auth;
 
 use Hyvor\Helper\Auth\Providers\CurrentProvider;
-use Hyvor\Login\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 

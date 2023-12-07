@@ -10,8 +10,6 @@ This package provides the following features for HYVOR applications in Laravel:
 composer require hyvor/helper-laravel
 ```
 
-## Authentication
-
 ## Providers
 
 This library supports the following authentication providers:
@@ -22,22 +20,91 @@ This library supports the following authentication providers:
 
 ### Configuration
 
-
-### Auth check
-
+To be written...
 
 ### User Data
 
-Usually, with HYVOR login, only the user ID is stored at the application level. Other data, such as name and picture URL, are fetched from the HYVOR API when needed. The `AuthUser` class has the following static methods to get user data:
+The `AuthUser` class is used to represent the user. It has the following properties:
 
-- `fromId($id)`
-- `fromIds($ids)`
-- `fromEmail($email)`
-- `fromEmails($emails)`
-- `fromUsername($username)`
-- `fromUsernames($usernames)`
+- `int $id` - the user ID
+- `string $name` - the user's name
+- `string $email` - the user's email
+- `?string $username` - the user's username (only HYVOR)
+- `?string $picture_url` - the user's picture URL
+- `?string $location` - the user's location
+- `?string $bio` - the user's bio
+- `?string $website_url` - the user's website URL
+- `?string $sub` - the user's sub (only OpenID Connect)
 
-The OpenID Connect provider stores all the user data at the application level. The same above methods can be used to get user data. The Fake provider always returns dummy data for all requested ids, emails, and usernames. A custom database can be set for the Fake provider as follows:
+#### Instantiation
+
+```php
+<?php
+use Hyvor\Helper\Auth\AuthUser;
+
+// new instance
+new AuthUser(
+    id: $id, 
+    name: $name, 
+    ...
+);
+
+// from array
+AuthUser::fromArray([
+    'id' => $id,
+    'name' => $name
+])
+```
+
+#### Fetch Data
+
+Fetching user data should always be done using API calls rather than using SQL joins in application-level querie, even if OpenID Connect is used. This is because HYVOR user data is always stored in an external database.
+
+Use the following methods to fetch data by user ID, email, or username:
+
+```php
+<?php
+use Hyvor\Helper\Auth\AuthUser;
+
+AuthUser::fromId($id);
+AuthUser::fromIds($ids);
+
+AuthUser::fromEmail($email);
+AuthUser::fromEmails($emails);
+
+AuthUser::fromUsername($username);
+AuthUser::fromUsernames($usernames);
+```
+
+### Auth check
+
+To check if the user is logged in:
+
+```php
+use Hyvor\Helper\Auth\Auth;
+
+// AuthUser|null
+$user = Auth::check();
+
+if ($user) {
+    // user is logged in
+}
+```
+
+### Redirects
+
+Use the following methods to get redirects to login, signup, and logout pages:
+
+```php
+use Hyvor\Helper\Auth\Auth;
+
+$loginUrl = Auth::login();
+$signupUrl = Auth::signup();
+$logoutUrl = Auth::logout();
+```
+### Testing
+
+In testing, the provider is always set to `fake`. The `FakeProvider` always generate dummy data for all requested ids, emails, and usernames. This is useful for testing. You may also set a database of users for the `FakeProvider` to return specific data for specific users as follows: 
 
 ```php
 use Hyvor\Helper\Auth\Providers\Fake\FakeProvider;
