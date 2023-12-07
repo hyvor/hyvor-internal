@@ -10,9 +10,9 @@ This package provides the following features for HYVOR applications in Laravel:
 composer require hyvor/helper-laravel
 ```
 
-## Providers
+## Auth
 
-This library supports the following authentication providers:
+This library provides a unified authentication system for the following providers:
 
 - HYVOR
 - OpenID Connect
@@ -20,7 +20,7 @@ This library supports the following authentication providers:
 
 ### Configuration
 
-The following environment variables are supported:
+The following environment variables are supported.  See `config.php` for configuration options. Environment variables should be set in the `.env` file.
 
 <table>
     <tr>
@@ -73,8 +73,6 @@ The `AuthUser` class is used to represent the user. It has the following propert
 - `?string $website_url` - the user's website URL
 - `?string $sub` - the user's sub (only OpenID Connect)
 
-#### Instantiation
-
 ```php
 <?php
 use Hyvor\Helper\Auth\AuthUser;
@@ -93,9 +91,9 @@ AuthUser::fromArray([
 ])
 ```
 
-#### Fetch Data
+### Fetching Data
 
-Fetching user data should always be done using API calls rather than using SQL joins in application-level querie, even if OpenID Connect is used. This is because HYVOR user data is always stored in an external database.
+Fetching user data should always be done using API calls rather than using SQL joins in application-level queries, even if OpenID Connect is used. This is because HYVOR user data is always stored in an external database.
 
 Use the following methods to fetch data by user ID, email, or username:
 
@@ -173,3 +171,48 @@ When a database is set, the `FakeProvider` will return the user data from that d
 - When a user's specific details are needed (e.g. name, email, etc.) as in the above example.
 
 In most other cases, you should be able to use the Fake provider without setting a database. Because it automatically generates dummy data for all users, you do not need to seed a database before each test case. However, note that user's data will be different for each test case.
+
+## HTTP
+
+This library provides a few helpers for handling HTTP requests.
+
+### Exceptions
+
+#### HttpException
+
+Use `Hyvor\Helper\Http\Exceptions\HttpException` to throw an HTTP exception. This is, in most cases, this error will be sent to the client in the JSON response. Therefore, only use this in middleware and controllers (never in domains). Never share sensitive information in the message.
+
+```php
+use Hyvor\Helper\Http\Exceptions\HttpException;
+
+throw new HttpException('User not found', 404);
+```
+
+### Middleware
+
+#### Auth Middleware
+
+Use `Hyvor\Helper\Http\Middleware\AuthMiddleware` to require authentication for a route. 
+
+```php
+use Hyvor\Helper\Http\Middleware\AuthMiddleware;
+
+Route::get()->middleware(AuthMiddleware::class);
+```
+
+If the user is not logged in, an `HttpException` is thrown with status code 401. If the user is logged in, an `AccessAuthUser` object (extends `AuthUser`) is added to the service container, which can be used as follows:
+
+```php
+use Hyvor\Helper\Http\Middleware\AccessAuthUser;
+
+class MyController 
+{
+    public function index(AccessAuthUser $user) {
+        // $user is an instance of AccessAuthUser (extends AuthUser)
+    }
+}
+
+function myFunction() {
+    $user = app(AccessAuthUser::class);
+}
+```
