@@ -137,6 +137,17 @@ $loginUrl = Auth::login();
 $signupUrl = Auth::signup();
 $logoutUrl = Auth::logout();
 ```
+
+By default, the user will be redirected to the current page after login or logout. You may also set the `redirect` parameter to redirect the user to a specific page after login or logout:
+
+```php
+use Hyvor\Helper\Auth\Auth;
+
+$loginUrl = Auth::login('/console');
+// or full URL
+$loginUrl = Auth::login('https://talk.hyvor.com/console');
+```
+
 ### Testing
 
 In testing, the provider is always set to `fake`. The `FakeProvider` always generate dummy data for all requested ids, emails, and usernames. This is useful for testing. You may also set a database of users for the `FakeProvider` to return specific data for specific users as follows: 
@@ -214,5 +225,18 @@ class MyController
 
 function myFunction() {
     $user = app(AccessAuthUser::class);
+}
+```
+
+## Models
+
+### HasUser Trait
+
+You may add the `Hyvor\Helper\Auth\HasUser` trait to any model to add a `user()` method to it. This method returns the `AuthUser` object, using the `user_id` column of the model.
+
+```php
+class Post extends Model
+{
+    use HasUser;
 }
 ```
