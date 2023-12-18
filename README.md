@@ -128,6 +128,8 @@ if ($user) {
 
 ### Redirects
 
+#### Programmatic Redirects
+
 Use the following methods to get redirects to login, signup, and logout pages:
 
 ```php
@@ -147,6 +149,16 @@ $loginUrl = Auth::login('/console');
 // or full URL
 $loginUrl = Auth::login('https://talk.hyvor.com/console');
 ```
+
+#### HTTP Redirects
+
+The following routes are added to the application for HTTP redirects:
+
+- `/api/auth/login`
+- `/api/auth/signup`
+- `/api/auth/logout`
+
+All endpoints support a `redirect` parameter to redirect the user to a specific page/URL after login or logout.
 
 ### Testing
 
