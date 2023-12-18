@@ -14,19 +14,19 @@ class Auth
         return CurrentProvider::getImplementation()->check();
     }
 
-    public static function login() : RedirectResponse|Redirector
+    public static function login(?string $redirect = null) : RedirectResponse|Redirector
     {
-        return CurrentProvider::getImplementation()->login();
+        return CurrentProvider::getImplementation()->login($redirect);
     }
 
-    public static function signup() : RedirectResponse|Redirector
+    public static function signup(?string $redirect = null) : RedirectResponse|Redirector
     {
-        return CurrentProvider::getImplementation()->signup();
+        return CurrentProvider::getImplementation()->signup($redirect);
     }
 
-    public static function logout() : RedirectResponse|Redirector
+    public static function logout(?string $redirect = null) : RedirectResponse|Redirector
     {
-        return CurrentProvider::getImplementation()->logout();
+        return CurrentProvider::getImplementation()->logout($redirect);
     }
 
 }

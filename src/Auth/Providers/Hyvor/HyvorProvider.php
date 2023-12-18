@@ -55,8 +55,12 @@ class HyvorProvider implements ProviderInterface
             $redirectPage = $request->getPathInfo();
         }
 
+        $redirectUrl = $redirectPage && str_starts_with($redirectPage, 'https://')
+            ? $redirectPage
+            : $request->getSchemeAndHttpHost() . $redirectPage;
+
         $redirect = $placeholder . 'redirect=' .
-            urlencode($request->getSchemeAndHttpHost() . $redirectPage);
+            urlencode($redirectUrl);
 
         return redirect(
             config('hyvor-helper.auth.hyvor.url') .
@@ -66,19 +70,19 @@ class HyvorProvider implements ProviderInterface
         );
     }
 
-    public function login(): RedirectResponse|Redirector
+    public function login(?string $redirect = null): RedirectResponse|Redirector
     {
-        return $this->redirectTo('login');
+        return $this->redirectTo('login', $redirect);
     }
 
-    public function signup(): RedirectResponse|Redirector
+    public function signup(?string $redirect = null): RedirectResponse|Redirector
     {
-        return $this->redirectTo('signup');
+        return $this->redirectTo('signup', $redirect);
     }
 
-    public function logout(): RedirectResponse|Redirector
+    public function logout(?string $redirect = null): RedirectResponse|Redirector
     {
-        return $this->redirectTo('logout');
+        return $this->redirectTo('logout', $redirect);
     }
 
     /**

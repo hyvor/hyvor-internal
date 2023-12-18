@@ -76,6 +76,19 @@ it('redirects', function() {
     expect($logout)->toBeInstanceOf(RedirectResponse::class);
     expect($logout->getTargetUrl())->toStartWith('https://hyvor.com/logout?redirect=');
 
+
+    // page
+    $login = $this->provider->login('/exit');
+    expect($login)->toBeInstanceOf(RedirectResponse::class);
+    expect($login->getTargetUrl())->toStartWith('https://hyvor.com/login?redirect=');
+    expect($login->getTargetUrl())->toContain('redirect=http%3A%2F%2Flocalhost%2Fexit');
+
+    // full URL
+    $login = $this->provider->login('https://example.com/exit');
+    expect($login)->toBeInstanceOf(RedirectResponse::class);
+    expect($login->getTargetUrl())->toStartWith('https://hyvor.com/login?redirect=');
+    expect($login->getTargetUrl())->toContain('redirect=https%3A%2F%2Fexample.com%2Fexit');
+
 });
 
 it('from ids', function() {

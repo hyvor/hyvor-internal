@@ -12,9 +12,9 @@ interface ProviderInterface
 
     public function check() : false|AuthUser;
 
-    public function login() : RedirectResponse|Redirector;
-    public function signup() : RedirectResponse|Redirector;
-    public function logout() : RedirectResponse|Redirector;
+    public function login(?string $redirect = null) : RedirectResponse|Redirector;
+    public function signup(?string $redirect = null) : RedirectResponse|Redirector;
+    public function logout(?string $redirect = null) : RedirectResponse|Redirector;
 
     /**
      * @param iterable<int> $ids
