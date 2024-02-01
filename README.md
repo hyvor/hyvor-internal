@@ -240,6 +240,15 @@ function myFunction() {
 }
 ```
 
+### Routes
+
+Here's a list of routes added by this library:
+
+- `POST /api/auth/check` - returns the logged-in user or null.
+- `GET /api/auth/login` - redirects to the login page.
+- `GET /api/auth/signup` - redirects to the signup page.
+- `GET /api/auth/logout` - redirects to the logout page.
+
 ## Models
 
 ### HasUser Trait

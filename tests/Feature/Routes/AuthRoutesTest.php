@@ -2,6 +2,24 @@
 
 namespace Hyvor\Helper\Tests\Feature\Routes;
 
+it('check when not logged in', function() {
+    config(['hyvor-helper.auth.fake.user_id' => null]);
+
+    $this
+        ->post('/api/auth/check')
+        ->assertJsonPath('is_logged_in', false)
+        ->assertJsonPath('user', null);
+});
+
+it('check when logged in', function() {
+    config(['hyvor-helper.auth.fake.user_id' => 1]);
+
+    $this
+        ->post('/api/auth/check')
+        ->assertJsonPath('is_logged_in', true)
+        ->assertJsonPath('user.id', 1);
+});
+
 it('redirects', function() {
 
     config(['hyvor-helper.auth.provider' => 'hyvor']);
