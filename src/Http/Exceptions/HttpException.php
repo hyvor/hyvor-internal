@@ -9,4 +9,25 @@ use Exception;
  * In most cases, this will then be converted to JSON and sent to the client.
  */
 class HttpException extends Exception
-{}
+{
+
+    /**
+     * @var array<string, mixed>
+     */
+    public $data = [];
+
+    /**
+     * @param string $message
+     * @param int $code
+     * @param array<string, mixed> $data
+     */
+    public function __construct(
+        string $message,
+        int $code = 0,
+        array $data = []
+    ) {
+        $this->data = $data;
+        parent::__construct($message, $code);
+    }
+
+}

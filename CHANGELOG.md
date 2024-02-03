@@ -1,3 +1,7 @@
+## 0.0.8 - 2024-02-03
+- Data attribute added to the HttpException class 
+  to allow for custom data to be returned with the error response
+
 ## 0.0.7 - 2024-02-01
 - Added `/api/auth/check` route
 
