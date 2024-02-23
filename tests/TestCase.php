@@ -3,6 +3,8 @@
 namespace Hyvor\Helper\Tests;
 
 use Hyvor\Helper\Auth\AuthServiceProvider;
+use Hyvor\Helper\Internationalization\InternationalizationServiceProvider;
+
 class TestCase extends \Orchestra\Testbench\TestCase
 {
     /*public function setUp(): void
@@ -13,6 +15,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         return [
             AuthServiceProvider::class,
+            InternationalizationServiceProvider::class
         ];
     }
 

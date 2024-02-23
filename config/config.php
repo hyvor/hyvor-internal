@@ -66,6 +66,20 @@ return [
             'user_id' => env('AUTH_FAKE_USER_ID', 1),
         ]
 
+    ],
+
+    'i18n' => [
+
+        /**
+         * Folder that contains the locale JSON files
+         */
+        'folder' => base_path('locales'),
+
+        /**
+         * Default locale
+         */
+        'default' => 'en-US',
+
     ]
 
 ];
