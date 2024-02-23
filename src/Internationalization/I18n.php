@@ -85,7 +85,7 @@ class I18n
         $json = file_get_contents($file);
 
         if (!$json) {
-            throw new RuntimeException('Could not read the locale file');
+            throw new RuntimeException('Could not read the locale file of ' . $locale);
         }
 
         return (array) json_decode($json, true);
