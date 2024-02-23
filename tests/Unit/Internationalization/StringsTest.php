@@ -2,6 +2,7 @@
 
 namespace Hyvor\Helper\Tests\Unit\Internationalization;
 
+use Hyvor\Helper\Internationalization\Exceptions\InvalidStringKeyException;
 use Hyvor\Helper\Internationalization\Strings;
 
 beforeEach(function() {
@@ -38,3 +39,7 @@ it('missing locale', function() {
     expect($locale->get('name'))->toBe('HYVOR');
 
 });
+
+it('throws on invalid key', function() {
+    (new Strings('en-US'))->get('invalid-key');
+})->throws(InvalidStringKeyException::class);
