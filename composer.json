@@ -1,6 +1,6 @@
 {
     "name": "hyvor/helper-laravel",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "description": "Helper Package for HYVOR Applications",
     "type": "library",
     "license": "MIT",
