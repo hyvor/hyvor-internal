@@ -261,3 +261,64 @@ class Post extends Model
     use HasUser;
 }
 ```
+
+## Internationalization
+
+This library provides some helpers to handle internationalization. Most of the time, strings are used in the front-end in HYVOR apps, but for some cases like emails, you may need to translate strings in the back-end. Similar to our [Design System](https://github.com/hyvor/design), we use the [ICU message format](https://unicode-org.github.io/icu/userguide/format_parse/messages/). Therefore, you can share the same translations between the front-end and back-end.
+
+All JSON translation files should be places in a directory, which is set in the config file. The default directory is `resources/lang`. The file name should be the language code (e.g. `en-US.json`). The file should be a JSON object with keys as the message IDs and values as the translations. Nested keys are also supported. The locales are loaded from the files in the directory.
+
+```json
+{
+    "welcome": "Welcome to HYVOR",
+    "email": "Your email is {email}.",
+    "signup": {
+        "title": "Sign Up"
+    }
+}
+``` 
+
+### Usage
+
+```php
+use Hyvor\Helper\Internationalization\Strings;
+
+$strings = new Strings('en-US');
+$welcome = $strings->get('welcome');
+$email = $strings->get('email', ['email' => 'me@hyvor.com']);
+$signupTitle = $strings->get('signup.title');
+```
+
+The locale is matched to the closest available locale. For example, if you have the following locales:
+
+- `en-US`
+- `fr-FR`
+- `es`
+
+```php
+new Strings('en');; // locale -> `en-US`
+new Strings('en-GB'); // locale -> `en-US`
+new Strings('fr-FR'); // locale -> `fr-FR`
+new Strings('fr'); // locale -> `fr-FR`
+new Strings('es-ES'); // locale -> `es`
+```
+
+You can also use the `ClosestLocale` class to get the closest locale to a given locale.
+
+```php
+use Hyvor\Helper\Internationalization\ClosestLocale;
+
+ClosestLocale::get('en', ['en-US', 'fr-FR', 'es']); // returns `en-US`
+```
+
+The `I18n` singleton class is the base class that manages the locales in the app.
+
+```php
+use Hyvor\Helper\Internationalization\I18n;
+
+$i18n = app(I18n::class);
+
+$i18n->getAvailableLocales(); // ['en-US', 'fr-FR', 'es', ...]
+$i18n->getLocaleStrings('en-US'); // returns the strings from the JSON file as an array
+$i18n->getDefaultLocaleStrings(); // strings of the default locale
+```

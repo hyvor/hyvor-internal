@@ -1,3 +1,6 @@
+## 0.0.9 - 2024-02-23
+- Internationalization support added
+
 ## 0.0.8 - 2024-02-03
 - Data attribute added to the HttpException class 
   to allow for custom data to be returned with the error response

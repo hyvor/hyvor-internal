@@ -1,0 +1,7 @@
+{
+    "name": "HYVOR",
+    "greet": "Hello, {name}!",
+    "signup": {
+        "cta": "Sign up now"
+    }
+}
