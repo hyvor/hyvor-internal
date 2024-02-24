@@ -4,6 +4,7 @@ namespace Hyvor\Helper\Tests;
 
 use Hyvor\Helper\Auth\AuthServiceProvider;
 use Hyvor\Helper\Internationalization\InternationalizationServiceProvider;
+use Hyvor\Helper\Media\MediaServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -13,10 +14,9 @@ class TestCase extends \Orchestra\Testbench\TestCase
     }*/
     protected function getPackageProviders($app)
     {
-        return [
-            AuthServiceProvider::class,
-            InternationalizationServiceProvider::class
-        ];
+        $composer = json_decode(file_get_contents(__DIR__ . '/../composer.json'), true);
+        $providers = $composer['extra']['laravel']['providers'] ?? [];
+        return $providers;
     }
 
 }

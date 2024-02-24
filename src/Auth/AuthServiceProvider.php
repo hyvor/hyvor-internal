@@ -13,6 +13,7 @@ class AuthServiceProvider extends ServiceProvider
 
     public function register()
     {
+        // TODO: Migrate this to a global service provider
         $this->mergeConfigFrom(__DIR__ . '/../../config/config.php', 'hyvor-helper');
     }
 }

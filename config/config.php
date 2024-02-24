@@ -80,6 +80,14 @@ return [
          */
         'default' => 'en-US',
 
+    ],
+
+    'media' => [
+
+        'path' => 'api/media',
+
+        'disk' => 'public'
+
     ]
 
 ];
