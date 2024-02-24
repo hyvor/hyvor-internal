@@ -29,7 +29,8 @@
         "laravel": {
             "providers": [
                 "Hyvor\\Helper\\Auth\\AuthServiceProvider",
-                "Hyvor\\Helper\\Internationalization\\InternationalizationServiceProvider"
+                "Hyvor\\Helper\\Internationalization\\InternationalizationServiceProvider",
+                "Hyvor\\Helper\\Media\\MediaServiceProvider"
             ]
         }
     },
