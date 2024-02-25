@@ -3,7 +3,9 @@
 namespace Hyvor\Helper\Tests\Feature\Routes;
 
 it('check when not logged in', function() {
-    config(['hyvor-helper.auth.fake.user_id' => null]);
+    config([
+        'hyvor-helper.auth.fake.user_id' => null
+    ]);
 
     $this
         ->post('/api/auth/check')

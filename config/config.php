@@ -2,6 +2,12 @@
 
 return [
 
+    /**
+     * This is the domain that the app is running on.
+     * Routes are only accessible from this domain.
+     */
+    'domain' => env('APP_DOMAIN', '{any}'),
+
     'auth' => [
 
         /**

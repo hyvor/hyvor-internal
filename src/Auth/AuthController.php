@@ -1,8 +1,7 @@
 <?php
 
-namespace Hyvor\Helper\Http\Controllers;
+namespace Hyvor\Helper\Auth;
 
-use Hyvor\Helper\Auth\Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

@@ -1,6 +1,6 @@
 <?php
 
-use Hyvor\Helper\Http\Controllers\AuthController;
+use Hyvor\Helper\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/api/auth/check', [AuthController::class, 'check']);
