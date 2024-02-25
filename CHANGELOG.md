@@ -1,3 +1,7 @@
+## 0.0.10 - 2024-02-24
+- Media routes for serving/streaming media files from storage
+- Domain name restrictions for routes
+
 ## 0.0.9 - 2024-02-23
 - Internationalization support added
 

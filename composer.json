@@ -1,6 +1,6 @@
 {
     "name": "hyvor/helper-laravel",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "description": "Helper Package for HYVOR Applications",
     "type": "library",
     "license": "MIT",
@@ -28,9 +28,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Hyvor\\Helper\\Auth\\AuthServiceProvider",
-                "Hyvor\\Helper\\Internationalization\\InternationalizationServiceProvider",
-                "Hyvor\\Helper\\Media\\MediaServiceProvider"
+                "Hyvor\\Helper\\HelperServiceProvider",
+                "Hyvor\\Helper\\Internationalization\\InternationalizationServiceProvider"
             ]
         }
     },

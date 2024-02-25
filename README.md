@@ -322,3 +322,7 @@ $i18n->getAvailableLocales(); // ['en-US', 'fr-FR', 'es', ...]
 $i18n->getLocaleStrings('en-US'); // returns the strings from the JSON file as an array
 $i18n->getDefaultLocaleStrings(); // strings of the default locale
 ```
+
+## Media
+
+This library adds the `/api/media/{path}` route to your app. This route will serve/stream files from the default storage disk. This makes it easy to serve the files from the same domain.
