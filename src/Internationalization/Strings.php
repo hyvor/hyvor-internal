@@ -11,7 +11,7 @@ class Strings
 
     public string $locale;
 
-    public function __construct(string $locale)
+    public function __construct(?string $locale = null)
     {
         $this->locale = ClosestLocale::get($locale);
     }

@@ -5,10 +5,11 @@ namespace Hyvor\Helper\Internationalization;
 class ClosestLocale
 {
 
-    public static function get(string $locale) : string
+    public static function get(?string $locale) : string
     {
 
         $i18n = app(I18n::class);
+        $locale ??= $i18n->defaultLocale;
         $locales = $i18n->getAvailableLocales();
 
         if (in_array($locale, $locales)) {

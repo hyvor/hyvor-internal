@@ -1,3 +1,6 @@
+## 0.0.11 - 2024-02-26
+- Strings constructor locale is nullable
+
 ## 0.0.10 - 2024-02-24
 - Media routes for serving/streaming media files from storage
 - Domain name restrictions for routes
