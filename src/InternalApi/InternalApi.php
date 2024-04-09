@@ -16,7 +16,7 @@ class InternalApi
     public function call() : Response
     {
 
-        return Http::send('POST', config('hyvor-helper.internal_api_url'), [
+        return Http::send('POST', config('hyvor-internal.internal_api_url'), [
             'type' => $this->type->value,
         ]);
 

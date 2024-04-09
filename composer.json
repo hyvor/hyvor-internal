@@ -28,8 +28,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Hyvor\\Helper\\HelperServiceProvider",
-                "Hyvor\\Helper\\Internationalization\\InternationalizationServiceProvider"
+                "Hyvor\\Internal\\InternalServiceProvider",
+                "Hyvor\\Internal\\Internationalization\\InternationalizationServiceProvider"
             ]
         }
     },
@@ -39,7 +39,7 @@
         }
     },
     "require": {
-        "php": "^8.1|^8.2",
+        "php": "^8.1|^8.2|^8.3",
         "ext-intl": "*",
         "guzzlehttp/guzzle": "^7.8"
     }

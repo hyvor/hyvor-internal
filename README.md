@@ -1,4 +1,4 @@
-# hyvor-helper-laravel
+# hyvor-internal
 
 This package provides the following features for HYVOR applications in Laravel:
 

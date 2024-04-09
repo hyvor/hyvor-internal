@@ -4,7 +4,7 @@ namespace Hyvor\Internal;
 
 use Illuminate\Support\ServiceProvider;
 
-class HelperServiceProvider extends ServiceProvider
+class InternalServiceProvider extends ServiceProvider
 {
 
     public function boot() : void
@@ -14,7 +14,7 @@ class HelperServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'hyvor-helper');
+        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'hyvor-internal');
     }
 
 }

@@ -63,7 +63,7 @@ class HyvorProvider implements ProviderInterface
             urlencode($redirectUrl);
 
         return redirect(
-            config('hyvor-helper.auth.hyvor.url') .
+            config('hyvor-internal.auth.hyvor.url') .
             '/' .
             $page .
             $redirect

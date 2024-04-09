@@ -12,7 +12,7 @@ class CurrentProvider
 
     public static function get() : AuthProviderEnum
     {
-        $provider = strval(config('hyvor-helper.auth.provider'));
+        $provider = strval(config('hyvor-internal.auth.provider'));
         return AuthProviderEnum::from($provider);
     }
 
