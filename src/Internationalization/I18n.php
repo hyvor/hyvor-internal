@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyvor\Helper\Internationalization;
+namespace Hyvor\Internal\Internationalization;
 
 use RuntimeException;
 

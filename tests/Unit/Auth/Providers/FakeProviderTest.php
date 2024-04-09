@@ -2,7 +2,7 @@
 
 namespace Unit\Auth\Providers;
 
-use Hyvor\Helper\Auth\Providers\Fake\FakeProvider;
+use Hyvor\Internal\Auth\Providers\Fake\FakeProvider;
 
 beforeEach(function () {
     $this->provider = new FakeProvider();

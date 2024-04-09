@@ -1,17 +1,17 @@
 {
-    "name": "hyvor/helper-laravel",
+    "name": "hyvor/internal",
     "version": "0.0.11",
-    "description": "Helper Package for HYVOR Applications",
+    "description": "Internal Package for HYVOR Applications",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Hyvor\\Helper\\": "src/"
+            "Hyvor\\Internal\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Hyvor\\Helper\\Tests\\": "tests"
+            "Hyvor\\Internal\\Tests\\": "tests"
         }
     },
     "authors": [

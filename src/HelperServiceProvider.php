@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyvor\Helper;
+namespace Hyvor\Internal;
 
 use Illuminate\Support\ServiceProvider;
 

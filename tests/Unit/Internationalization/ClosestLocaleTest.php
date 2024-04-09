@@ -1,8 +1,8 @@
 <?php
 
-namespace Hyvor\Helper\Tests\Unit\Internationalization;
+namespace Hyvor\Internal\Tests\Unit\Internationalization;
 
-use Hyvor\Helper\Internationalization\ClosestLocale;
+use Hyvor\Internal\Internationalization\ClosestLocale;
 use function Pest\testDirectory;
 
 beforeEach(function() {

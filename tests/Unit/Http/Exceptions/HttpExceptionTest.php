@@ -1,8 +1,8 @@
 <?php
 
-namespace Hyvor\Helper\Tests\Unit\Http\Exceptions;
+namespace Hyvor\Internal\Tests\Unit\Http\Exceptions;
 
-use Hyvor\Helper\Http\Exceptions\HttpException;
+use Hyvor\Internal\Http\Exceptions\HttpException;
 
 it('creates with data', function() {
     $exception = new HttpException('message', 1001, ['key' => 'value']);

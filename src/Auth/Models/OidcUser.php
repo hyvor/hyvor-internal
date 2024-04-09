@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyvor\Helper\Auth\Models;
+namespace Hyvor\Internal\Auth\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Hyvor\Helper\Tests\Unit\Internationalization;
+namespace Hyvor\Internal\Tests\Unit\Internationalization;
 
-use Hyvor\Helper\Internationalization\Exceptions\InvalidStringKeyException;
-use Hyvor\Helper\Internationalization\Strings;
+use Hyvor\Internal\Internationalization\Exceptions\InvalidStringKeyException;
+use Hyvor\Internal\Internationalization\Strings;
 
 beforeEach(function() {
     config(['hyvor-helper.i18n.folder' => __DIR__ . '/locales']);

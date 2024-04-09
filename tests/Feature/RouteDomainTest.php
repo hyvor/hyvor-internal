@@ -1,8 +1,8 @@
 <?php
 
-namespace Hyvor\Helper\Tests\Feature;
+namespace Hyvor\Internal\Tests\Feature;
 
-use Hyvor\Helper\HelperServiceProvider;
+use Hyvor\Internal\HelperServiceProvider;
 use Illuminate\Routing\RouteCollection;
 use Illuminate\Support\Facades\Route;
 

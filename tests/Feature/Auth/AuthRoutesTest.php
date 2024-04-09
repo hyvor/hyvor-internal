@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyvor\Helper\Tests\Feature\Routes;
+namespace Hyvor\Internal\Tests\Feature\Routes;
 
 it('check when not logged in', function() {
     config([

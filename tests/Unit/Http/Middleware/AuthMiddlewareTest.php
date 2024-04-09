@@ -1,10 +1,10 @@
 <?php
 
-namespace Hyvor\Helper\Tests\Unit\Http\Middleware;
+namespace Hyvor\Internal\Tests\Unit\Http\Middleware;
 
-use Hyvor\Helper\Http\Exceptions\HttpException;
-use Hyvor\Helper\Http\Middleware\AccessAuthUser;
-use Hyvor\Helper\Http\Middleware\AuthMiddleware;
+use Hyvor\Internal\Http\Exceptions\HttpException;
+use Hyvor\Internal\Http\Middleware\AccessAuthUser;
+use Hyvor\Internal\Http\Middleware\AuthMiddleware;
 use Illuminate\Http\Request;
 
 it('throws an error when the user is not logged in', function () {

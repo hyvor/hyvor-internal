@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyvor\Helper\Auth\Providers\Hyvor;
+namespace Hyvor\Internal\Auth\Providers\Hyvor;
 
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;

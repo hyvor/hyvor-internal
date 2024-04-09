@@ -1,9 +1,9 @@
 <?php
 
-namespace Hyvor\Helper\Tests\Unit\Auth;
+namespace Hyvor\Internal\Tests\Unit\Auth;
 
-use Hyvor\Helper\Auth\AuthUser;
-use Hyvor\Helper\Auth\HasUser;
+use Hyvor\Internal\Auth\AuthUser;
+use Hyvor\Internal\Auth\HasUser;
 
 class ModelWithHasUser
 {

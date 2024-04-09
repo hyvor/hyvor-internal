@@ -1,8 +1,8 @@
 <?php
 
-namespace Hyvor\Helper\Tests\Feature;
+namespace Hyvor\Internal\Tests\Feature;
 
-use Hyvor\Helper\Auth\Auth;
+use Hyvor\Internal\Auth\Auth;
 use Illuminate\Http\RedirectResponse;
 
 it('checks', function() {
