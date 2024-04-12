@@ -2,6 +2,17 @@
 
 namespace Hyvor\Internal\Tests\Feature\Routes;
 
+use Hyvor\Internal\InternalServiceProvider;
+use Illuminate\Routing\RouteCollection;
+use Illuminate\Support\Facades\Route;
+
+it('doesnot add routes if disabled', function() {
+    config(['hyvor-internal.auth.routes' => false]);
+    Route::setRoutes(new RouteCollection());
+    (new InternalServiceProvider($this->app))->boot();
+    $this->get('/api/auth/check')->assertNotFound();
+});
+
 it('check when not logged in', function() {
     config([
         'hyvor-internal.auth.fake.user_id' => null

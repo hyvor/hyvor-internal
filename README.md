@@ -6,7 +6,7 @@ This package provides the following features for HYVOR applications in Laravel:
 - HTTP helpers
 - Media route
 - Internationalization
-- Internal API
+- Component API
 
 ## Installation
 
