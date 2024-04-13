@@ -1,15 +1,15 @@
 <?php
 
-namespace Hyvor\Helper\Tests\Unit\Http\Middleware;
+namespace Hyvor\Internal\Tests\Unit\Http\Middleware;
 
-use Hyvor\Helper\Http\Exceptions\HttpException;
-use Hyvor\Helper\Http\Middleware\AccessAuthUser;
-use Hyvor\Helper\Http\Middleware\AuthMiddleware;
+use Hyvor\Internal\Http\Exceptions\HttpException;
+use Hyvor\Internal\Http\Middleware\AccessAuthUser;
+use Hyvor\Internal\Http\Middleware\AuthMiddleware;
 use Illuminate\Http\Request;
 
 it('throws an error when the user is not logged in', function () {
 
-    config(['hyvor-helper.auth.fake.user_id' => null]);
+    config(['hyvor-internal.auth.fake.user_id' => null]);
     $request = new Request();
     (new AuthMiddleware())->handle($request, function () {});
 
@@ -17,7 +17,7 @@ it('throws an error when the user is not logged in', function () {
 
 it('sets access auth user when user is logged in', function() {
 
-    config(['hyvor-helper.auth.fake.user_id' => 15]);
+    config(['hyvor-internal.auth.fake.user_id' => 15]);
 
     $request = new Request();
     (new AuthMiddleware())->handle($request, function () {

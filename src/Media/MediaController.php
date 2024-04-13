@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyvor\Helper\Media;
+namespace Hyvor\Internal\Media;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Hyvor\Helper\Auth\Providers\Oidc;
+namespace Hyvor\Internal\Auth\Providers\Oidc;
 
-use Hyvor\Helper\Auth\AuthUser;
-use Hyvor\Helper\Auth\Providers\ProviderInterface;
+use Hyvor\Internal\Auth\AuthUser;
+use Hyvor\Internal\Auth\Providers\ProviderInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 

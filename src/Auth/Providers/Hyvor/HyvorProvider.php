@@ -1,9 +1,9 @@
 <?php
 
-namespace Hyvor\Helper\Auth\Providers\Hyvor;
+namespace Hyvor\Internal\Auth\Providers\Hyvor;
 
-use Hyvor\Helper\Auth\AuthUser;
-use Hyvor\Helper\Auth\Providers\ProviderInterface;
+use Hyvor\Internal\Auth\AuthUser;
+use Hyvor\Internal\Auth\Providers\ProviderInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
@@ -63,7 +63,7 @@ class HyvorProvider implements ProviderInterface
             urlencode($redirectUrl);
 
         return redirect(
-            config('hyvor-helper.auth.hyvor.url') .
+            config('hyvor-internal.auth.hyvor.url') .
             '/' .
             $page .
             $redirect

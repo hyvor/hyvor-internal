@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Hyvor\Helper\Auth;
+namespace Hyvor\Internal\Auth;
 
-use Hyvor\Helper\Auth\Providers\CurrentProvider;
+use Hyvor\Internal\Auth\Providers\CurrentProvider;
 use Illuminate\Support\Collection;
 
 /**

@@ -1,17 +1,17 @@
 {
-    "name": "hyvor/helper-laravel",
+    "name": "hyvor/internal",
     "version": "0.0.11",
-    "description": "Helper Package for HYVOR Applications",
+    "description": "Internal Package for HYVOR Applications",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Hyvor\\Helper\\": "src/"
+            "Hyvor\\Internal\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Hyvor\\Helper\\Tests\\": "tests"
+            "Hyvor\\Internal\\Tests\\": "tests"
         }
     },
     "authors": [
@@ -28,8 +28,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Hyvor\\Helper\\HelperServiceProvider",
-                "Hyvor\\Helper\\Internationalization\\InternationalizationServiceProvider"
+                "Hyvor\\Internal\\InternalServiceProvider",
+                "Hyvor\\Internal\\Internationalization\\InternationalizationServiceProvider"
             ]
         }
     },
@@ -39,7 +39,7 @@
         }
     },
     "require": {
-        "php": "^8.1|^8.2",
+        "php": "^8.1|^8.2|^8.3",
         "ext-intl": "*",
         "guzzlehttp/guzzle": "^7.8"
     }

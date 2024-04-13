@@ -1,10 +1,21 @@
 <?php
 
-namespace Hyvor\Helper\Tests\Feature\Routes;
+namespace Hyvor\Internal\Tests\Feature\Routes;
+
+use Hyvor\Internal\InternalServiceProvider;
+use Illuminate\Routing\RouteCollection;
+use Illuminate\Support\Facades\Route;
+
+it('doesnot add routes if disabled', function() {
+    config(['hyvor-internal.auth.routes' => false]);
+    Route::setRoutes(new RouteCollection());
+    (new InternalServiceProvider($this->app))->boot();
+    $this->get('/api/auth/check')->assertNotFound();
+});
 
 it('check when not logged in', function() {
     config([
-        'hyvor-helper.auth.fake.user_id' => null
+        'hyvor-internal.auth.fake.user_id' => null
     ]);
 
     $this
@@ -14,7 +25,7 @@ it('check when not logged in', function() {
 });
 
 it('check when logged in', function() {
-    config(['hyvor-helper.auth.fake.user_id' => 1]);
+    config(['hyvor-internal.auth.fake.user_id' => 1]);
 
     $this
         ->post('/api/auth/check')
@@ -24,7 +35,7 @@ it('check when logged in', function() {
 
 it('redirects', function() {
 
-    config(['hyvor-helper.auth.provider' => 'hyvor']);
+    config(['hyvor-internal.auth.provider' => 'hyvor']);
 
     $this
         ->get('/api/auth/login')
@@ -42,7 +53,7 @@ it('redirects', function() {
 
 it('redirects with redirect', function() {
 
-    config(['hyvor-helper.auth.provider' => 'hyvor']);
+    config(['hyvor-internal.auth.provider' => 'hyvor']);
 
     $redirectUrl = urlencode('https://example.com');
 

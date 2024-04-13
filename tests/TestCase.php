@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyvor\Helper\Tests;
+namespace Hyvor\Internal\Tests;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {

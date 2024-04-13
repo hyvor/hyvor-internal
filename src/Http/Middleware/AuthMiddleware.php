@@ -1,10 +1,10 @@
 <?php
 
-namespace Hyvor\Helper\Http\Middleware;
+namespace Hyvor\Internal\Http\Middleware;
 
 use Closure;
-use Hyvor\Helper\Auth\Auth;
-use Hyvor\Helper\Http\Exceptions\HttpException;
+use Hyvor\Internal\Auth\Auth;
+use Hyvor\Internal\Http\Exceptions\HttpException;
 use Illuminate\Http\Request;
 
 class AuthMiddleware

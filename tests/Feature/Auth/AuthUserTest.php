@@ -1,8 +1,8 @@
 <?php
 
-namespace Hyvor\Helper\Tests\Feature;
+namespace Hyvor\Internal\Tests\Feature;
 
-use Hyvor\Helper\Auth\AuthUser;
+use Hyvor\Internal\Auth\AuthUser;
 use Illuminate\Support\Collection;
 
 it('is created from an array', function() {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Hyvor\Helper\Tests\Unit\Internationalization;
+namespace Hyvor\Internal\Tests\Unit\Internationalization;
 
-use Hyvor\Helper\Internationalization\I18n;
+use Hyvor\Internal\Internationalization\I18n;
 use RuntimeException;
 
 beforeEach(function() {
-    config(['hyvor-helper.i18n.folder' => __DIR__ . '/locales']);
+    config(['hyvor-internal.i18n.folder' => __DIR__ . '/locales']);
 });
 
 it('i18n works', function() {

@@ -5,16 +5,31 @@ return [
     /**
      * This is the domain that the app is running on.
      * Routes are only accessible from this domain.
+     * @todo: refactor this into `route.` setting
      */
     'domain' => env('APP_DOMAIN', '{any}'),
 
+    /**
+     * Which component is this?
+     * See `src/InternalApi/ComponentType.php` for available components
+     *
+     * core - hyvor.com
+     * talk - talk.hyvor.com
+     * ..
+     */
+    'component' => 'core',
+
     'auth' => [
+
+        /**
+         * Whether to add auth routes
+         */
+        'routes' => true,
 
         /**
          * Login provider to use
          * 
          * - hyvor: Hyvor API (default, requires hyvor.com self-hosted)
-         * - oidc: OpenID Connect (requires an OIDC provider)
          * - fake: Fake login (for testing)
          */
         'provider' => env('AUTH_PROVIDER', 'fake'),
@@ -43,26 +58,6 @@ return [
              * HYVOR API Key
              */
             'api_key' => env('AUTH_HYVOR_API_KEY', 'test-key'),
-        ],
-
-        /**
-         * OpenID Connect settings
-         */
-        'oidc' => [
-            /**
-             * OpenID Connect Provider URL
-             */
-            'provider_url' => env('AUTH_OIDC_PROVIDER_URL'),
-
-            /**
-             * Client ID
-             */
-            'client_id' => env('AUTH_OIDC_CLIENT_ID'),
-
-            /**
-             * Client Secret
-             */
-            'client_secret' => env('AUTH_OIDC_CLIENT_SECRET'),
         ],
 
         'fake' => [

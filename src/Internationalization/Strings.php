@@ -1,9 +1,9 @@
 <?php
 
-namespace Hyvor\Helper\Internationalization;
+namespace Hyvor\Internal\Internationalization;
 
-use Hyvor\Helper\Internationalization\Exceptions\FormatException;
-use Hyvor\Helper\Internationalization\Exceptions\InvalidStringKeyException;
+use Hyvor\Internal\Internationalization\Exceptions\FormatException;
+use Hyvor\Internal\Internationalization\Exceptions\InvalidStringKeyException;
 use MessageFormatter;
 
 class Strings

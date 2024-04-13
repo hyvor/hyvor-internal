@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyvor\Helper\Http\Exceptions;
+namespace Hyvor\Internal\Http\Exceptions;
 
 use Exception;
 

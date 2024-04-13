@@ -1,8 +1,8 @@
 <?php
 
-namespace Hyvor\Helper\Http\Middleware;
+namespace Hyvor\Internal\Http\Middleware;
 
-use Hyvor\Helper\Auth\AuthUser;
+use Hyvor\Internal\Auth\AuthUser;
 
 class AccessAuthUser extends AuthUser
 {}

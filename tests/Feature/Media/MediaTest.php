@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyvor\Helper\Tests\Feature\Media;
+namespace Hyvor\Internal\Tests\Feature\Media;
 
 use Illuminate\Support\Facades\Storage;
 

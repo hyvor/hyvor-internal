@@ -1,18 +1,18 @@
 <?php
 
-namespace Hyvor\Helper\Tests\Feature;
+namespace Hyvor\Internal\Tests\Feature;
 
-use Hyvor\Helper\HelperServiceProvider;
+use Hyvor\Internal\InternalServiceProvider;
 use Illuminate\Routing\RouteCollection;
 use Illuminate\Support\Facades\Route;
 
 it('does not add on other domains', function() {
 
-    $this->app->register(HelperServiceProvider::class, true);
+    $this->app->register(InternalServiceProvider::class, true);
 
-    config(['hyvor-helper.domain' => 'hyvor.com']);
+    config(['hyvor-internal.domain' => 'hyvor.com']);
     Route::setRoutes(new RouteCollection());
-    (new HelperServiceProvider($this->app))->boot();
+    (new InternalServiceProvider($this->app))->boot();
 
     $this
         ->post('https://nothyvor.com/api/auth/check')
@@ -21,11 +21,11 @@ it('does not add on other domains', function() {
 
 it('works with current domain', function() {
 
-    $this->app->register(HelperServiceProvider::class, true);
+    $this->app->register(InternalServiceProvider::class, true);
 
-    config(['hyvor-helper.domain' => 'hyvor.com']);
+    config(['hyvor-internal.domain' => 'hyvor.com']);
     Route::setRoutes(new RouteCollection());
-    (new HelperServiceProvider($this->app))->boot();
+    (new InternalServiceProvider($this->app))->boot();
 
     $this
         ->post('https://hyvor.com/api/auth/check')

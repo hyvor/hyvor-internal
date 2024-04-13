@@ -1,13 +1,17 @@
-# hyvor-helper-laravel
+# hyvor-internal
 
 This package provides the following features for HYVOR applications in Laravel:
 
-- Unified Authentication for HYVOR, OpenID Connect, and Fake (for testing)
+- Authentication (with fake provider)
+- HTTP helpers
+- Media route
+- Internationalization
+- Component API
 
-## Installation 
+## Installation
 
 ```bash
-composer require hyvor/helper-laravel
+composer require hyvor/internal
 ```
 
 ## Auth
@@ -75,7 +79,7 @@ The `AuthUser` class is used to represent the user. It has the following propert
 
 ```php
 <?php
-use Hyvor\Helper\Auth\AuthUser;
+use Hyvor\Internal\Auth\AuthUser;
 
 // new instance
 new AuthUser(
@@ -99,7 +103,7 @@ Use the following methods to fetch data by user ID, email, or username:
 
 ```php
 <?php
-use Hyvor\Helper\Auth\AuthUser;
+use Hyvor\Internal\Auth\AuthUser;
 
 AuthUser::fromId($id);
 AuthUser::fromIds($ids);
@@ -116,7 +120,7 @@ AuthUser::fromUsernames($usernames);
 To check if the user is logged in:
 
 ```php
-use Hyvor\Helper\Auth\Auth;
+use Hyvor\Internal\Auth\Auth;
 
 // AuthUser|null
 $user = Auth::check();
@@ -133,7 +137,7 @@ if ($user) {
 Use the following methods to get redirects to login, signup, and logout pages:
 
 ```php
-use Hyvor\Helper\Auth\Auth;
+use Hyvor\Internal\Auth\Auth;
 
 $loginUrl = Auth::login();
 $signupUrl = Auth::signup();
@@ -143,7 +147,7 @@ $logoutUrl = Auth::logout();
 By default, the user will be redirected to the current page after login or logout. You may also set the `redirect` parameter to redirect the user to a specific page after login or logout:
 
 ```php
-use Hyvor\Helper\Auth\Auth;
+use Hyvor\Internal\Auth\Auth;
 
 $loginUrl = Auth::login('/console');
 // or full URL
@@ -165,7 +169,7 @@ All endpoints support a `redirect` parameter to redirect the user to a specific 
 In testing, the provider is always set to `fake`. The `FakeProvider` always generate dummy data for all requested ids, emails, and usernames. This is useful for testing. You may also set a database of users for the `FakeProvider` to return specific data for specific users as follows: 
 
 ```php
-use Hyvor\Helper\Auth\Providers\Fake\FakeProvider;
+use Hyvor\Internal\Auth\Providers\Fake\FakeProvider;
 
 it('adds names to the email', function() {
 
@@ -203,10 +207,10 @@ This library provides a few helpers for handling HTTP requests.
 
 #### HttpException
 
-Use `Hyvor\Helper\Http\Exceptions\HttpException` to throw an HTTP exception. This is, in most cases, this error will be sent to the client in the JSON response. Therefore, only use this in middleware and controllers (never in domains). Never share sensitive information in the message.
+Use `Hyvor\Internal\Http\Exceptions\HttpException` to throw an HTTP exception. This is, in most cases, this error will be sent to the client in the JSON response. Therefore, only use this in middleware and controllers (never in domains). Never share sensitive information in the message.
 
 ```php
-use Hyvor\Helper\Http\Exceptions\HttpException;
+use Hyvor\Internal\Http\Exceptions\HttpException;
 
 throw new HttpException('User not found', 404);
 ```
@@ -215,10 +219,10 @@ throw new HttpException('User not found', 404);
 
 #### Auth Middleware
 
-Use `Hyvor\Helper\Http\Middleware\AuthMiddleware` to require authentication for a route. 
+Use `Hyvor\Internal\Http\Middleware\AuthMiddleware` to require authentication for a route. 
 
 ```php
-use Hyvor\Helper\Http\Middleware\AuthMiddleware;
+use Hyvor\Internal\Http\Middleware\AuthMiddleware;
 
 Route::get()->middleware(AuthMiddleware::class);
 ```
@@ -226,7 +230,7 @@ Route::get()->middleware(AuthMiddleware::class);
 If the user is not logged in, an `HttpException` is thrown with status code 401. If the user is logged in, an `AccessAuthUser` object (extends `AuthUser`) is added to the service container, which can be used as follows:
 
 ```php
-use Hyvor\Helper\Http\Middleware\AccessAuthUser;
+use Hyvor\Internal\Http\Middleware\AccessAuthUser;
 
 class MyController 
 {
@@ -253,7 +257,7 @@ Here's a list of routes added by this library:
 
 ### HasUser Trait
 
-You may add the `Hyvor\Helper\Auth\HasUser` trait to any model to add a `user()` method to it. This method returns the `AuthUser` object, using the `user_id` column of the model.
+You may add the `Hyvor\Internal\Auth\HasUser` trait to any model to add a `user()` method to it. This method returns the `AuthUser` object, using the `user_id` column of the model.
 
 ```php
 class Post extends Model
@@ -281,7 +285,7 @@ All JSON translation files should be places in a directory, which is set in the 
 ### Usage
 
 ```php
-use Hyvor\Helper\Internationalization\Strings;
+use Hyvor\Internal\Internationalization\Strings;
 
 $strings = new Strings('en-US');
 $welcome = $strings->get('welcome');
@@ -306,7 +310,7 @@ new Strings('es-ES'); // locale -> `es`
 You can also use the `ClosestLocale` class to get the closest locale to a given locale.
 
 ```php
-use Hyvor\Helper\Internationalization\ClosestLocale;
+use Hyvor\Internal\Internationalization\ClosestLocale;
 
 ClosestLocale::get('en', ['en-US', 'fr-FR', 'es']); // returns `en-US`
 ```
@@ -314,7 +318,7 @@ ClosestLocale::get('en', ['en-US', 'fr-FR', 'es']); // returns `en-US`
 The `I18n` singleton class is the base class that manages the locales in the app.
 
 ```php
-use Hyvor\Helper\Internationalization\I18n;
+use Hyvor\Internal\Internationalization\I18n;
 
 $i18n = app(I18n::class);
 

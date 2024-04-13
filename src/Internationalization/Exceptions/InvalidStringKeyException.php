@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyvor\Helper\Internationalization\Exceptions;
+namespace Hyvor\Internal\Internationalization\Exceptions;
 
 use Exception;
 

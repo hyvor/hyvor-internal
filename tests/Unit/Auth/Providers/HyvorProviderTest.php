@@ -1,9 +1,9 @@
 <?php
 
-namespace Hyvor\Helper\Tests\Unit\Auth\Providers;
+namespace Hyvor\Internal\Tests\Unit\Auth\Providers;
 
-use Hyvor\Helper\Auth\AuthUser;
-use Hyvor\Helper\Auth\Providers\Hyvor\HyvorProvider;
+use Hyvor\Internal\Auth\AuthUser;
+use Hyvor\Internal\Auth\Providers\Hyvor\HyvorProvider;
 use Illuminate\Http\Client\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Collection;

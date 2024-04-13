@@ -1,10 +1,10 @@
 <?php
 
-namespace Hyvor\Helper\Auth\Providers\Fake;
+namespace Hyvor\Internal\Auth\Providers\Fake;
 
 use Faker\Factory;
-use Hyvor\Helper\Auth\AuthUser;
-use Hyvor\Helper\Auth\Providers\ProviderInterface;
+use Hyvor\Internal\Auth\AuthUser;
+use Hyvor\Internal\Auth\Providers\ProviderInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Collection;
@@ -85,7 +85,7 @@ class FakeProvider implements ProviderInterface
 
     public static function getFakeUserId() : ?int
     {
-        $id = config('hyvor-helper.auth.fake.user_id');
+        $id = config('hyvor-internal.auth.fake.user_id');
         if (is_int($id)) {
             return $id;
         }

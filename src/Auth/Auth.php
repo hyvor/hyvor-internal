@@ -1,8 +1,8 @@
 <?php
 
-namespace Hyvor\Helper\Auth;
+namespace Hyvor\Internal\Auth;
 
-use Hyvor\Helper\Auth\Providers\CurrentProvider;
+use Hyvor\Internal\Auth\Providers\CurrentProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyvor\Helper\Auth\Providers\Hyvor;
+namespace Hyvor\Internal\Auth\Providers\Hyvor;
 
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
@@ -20,11 +20,11 @@ class HyvorApiCaller
     ) : Response
     {
 
-        $data['key'] = config('hyvor-helper.auth.hyvor.api_key');
+        $data['key'] = config('hyvor-internal.auth.hyvor.api_key');
         $endpoint = ltrim($endpoint, '/');
 
         return Http::withHeaders($headers)->post(
-            url: config('hyvor-helper.auth.hyvor.private_url') . '/api/auth/' . $endpoint,
+            url: config('hyvor-internal.auth.hyvor.private_url') . '/api/auth/' . $endpoint,
             data: $data
         );
 
