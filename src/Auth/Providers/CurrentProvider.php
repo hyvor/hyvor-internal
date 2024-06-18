@@ -5,7 +5,6 @@ namespace Hyvor\Internal\Auth\Providers;
 use Hyvor\Internal\Auth\AuthProviderEnum;
 use Hyvor\Internal\Auth\Providers\Fake\FakeProvider;
 use Hyvor\Internal\Auth\Providers\Hyvor\HyvorProvider;
-use Hyvor\Internal\Auth\Providers\Oidc\OidcProvider;
 
 class CurrentProvider
 {
@@ -22,8 +21,7 @@ class CurrentProvider
 
         return match ($provider) {
             AuthProviderEnum::HYVOR => new HyvorProvider,
-            AuthProviderEnum::FAKE => new FakeProvider,
-            AuthProviderEnum::OIDC => new OidcProvider
+            AuthProviderEnum::FAKE => new FakeProvider
         };
     }
 

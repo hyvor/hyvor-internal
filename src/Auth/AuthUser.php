@@ -11,6 +11,7 @@ use Illuminate\Support\Collection;
  *  username: string,
  *  name: string,
  *  email: string,
+ *  email_relay?: string,
  *  picture_url?: string,
  *  location?: string,
  *  bio?: string,
@@ -23,6 +24,7 @@ use Illuminate\Support\Collection;
  * username?: string,
  * name?: string,
  * email?: string,
+ * email_relay?: string,
  * picture_url?: string,
  * location?: string,
  * bio?: string,
@@ -38,12 +40,11 @@ class AuthUser
         public string $username,
         public string $name,
         public string $email,
+        public ?string $email_relay = null,
         public ?string $picture_url = null,
         public ?string $location = null,
         public ?string $bio = null,
         public ?string $website_url = null,
-        // only for OIDC
-        public ?string $sub = null,
     )
     {}
 
@@ -57,11 +58,11 @@ class AuthUser
             username: $data['username'],
             name: $data['name'],
             email: $data['email'],
+            email_relay: $data['email_relay'] ?? null,
             picture_url: $data['picture_url'] ?? null,
             location: $data['location'] ?? null,
             bio: $data['bio'] ?? null,
             website_url: $data['website_url'] ?? null,
-            sub: $data['sub'] ?? null,
         );
     }
 

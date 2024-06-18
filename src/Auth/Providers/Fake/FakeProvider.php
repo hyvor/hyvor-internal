@@ -103,7 +103,8 @@ class FakeProvider implements ProviderInterface
             'username' => $faker->name(),
             'name' => $faker->name(),
             'email' => $faker->email(),
-            'picture_url' => 'https://picsum.photos/100/100'
+            'email_relay' => $faker->userName() . '@relay.hyvor.com',
+            'picture_url' => 'https://picsum.photos/100/100',
         ], $fill));
     }
 
