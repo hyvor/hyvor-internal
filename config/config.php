@@ -39,6 +39,7 @@ return [
          */
         'hyvor' => [
             /**
+             * @deprecated
              * HYVOR Public URL
              * Users are redirected to this URL to login/signup
              */
@@ -49,15 +50,7 @@ return [
              * This is only required if you have HYVOR running on a private network
              * ex: http://0.0.0.1
              */
-            'private_url' => env(
-                'AUTH_HYVOR_PRIVATE_URL',
-                env('AUTH_HYVOR_URL', 'https://hyvor.com')
-            ),
-
-            /**
-             * HYVOR API Key
-             */
-            'api_key' => env('AUTH_HYVOR_API_KEY', 'test-key'),
+            'private_url' => env('AUTH_HYVOR_PRIVATE_URL'),
         ],
 
         'fake' => [

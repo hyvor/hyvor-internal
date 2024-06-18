@@ -2,6 +2,7 @@
 
 namespace Hyvor\Internal\Auth\Providers\Hyvor;
 
+use Hyvor\Internal\InternalApi\ComponentType;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
@@ -20,13 +21,17 @@ class HyvorApiCaller
     ) : Response
     {
 
-        $data['key'] = config('hyvor-internal.auth.hyvor.api_key');
         $endpoint = ltrim($endpoint, '/');
+        $headers['X-Signature'] = encrypt(json_encode($data));
 
-        return Http::withHeaders($headers)->post(
-            url: config('hyvor-internal.auth.hyvor.private_url') . '/api/auth/' . $endpoint,
-            data: $data
-        );
+        $hyvorApiUrl = config('hyvor-internal.auth.hyvor.private_url') ?? ComponentType::fromConfig()->getCoreUrl();
+
+        return Http::withHeaders($headers)
+            ->asJson()
+            ->post(
+                url: $hyvorApiUrl . '/api/auth/' . $endpoint,
+                data: $data
+            );
 
     }
 
