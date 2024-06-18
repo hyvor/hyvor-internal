@@ -23,7 +23,7 @@ it('is created from an array', function() {
     expect($user->location)->toBeNull();
     expect($user->bio)->toBeNull();
     expect($user->website_url)->toBeNull();
-    expect($user->sub)->toBeNull();
+    expect($user->email_relay)->toBeNull();
 
 });
 
