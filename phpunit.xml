@@ -18,6 +18,7 @@
 
     <php>
         <env name="APP_KEY" value="base64:1irAcKPAtLigPMX/ZDlz7D8CidOIPdgqpaCYUU2EIoU=" />
+        <env name="APP_DEBUG" value="true" />
         <env name="AUTH_HYVOR_PRIVATE_URL" value="https://hyvor.com" />
     </php>
 </phpunit>

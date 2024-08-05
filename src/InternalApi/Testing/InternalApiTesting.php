@@ -3,6 +3,7 @@
 namespace Hyvor\Internal\InternalApi\Testing;
 
 use Hyvor\Internal\InternalApi\ComponentType;
+use Hyvor\Internal\InternalApi\InternalApi;
 use Hyvor\Internal\InternalApi\InternalApiMethod;
 use Illuminate\Support\Facades\App;
 use Illuminate\Testing\TestResponse;
@@ -44,7 +45,9 @@ class InternalApiTesting
         return $test->call(
             $method->value,
             '/api/internal/' . $endpoint,
-            $data,
+            [
+                'message' => InternalApi::messageFromData($data),
+            ],
             [],
             [],
             [
