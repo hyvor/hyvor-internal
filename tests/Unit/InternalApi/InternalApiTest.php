@@ -37,6 +37,7 @@ it('calls talk internal API', function() {
         expect($headers['X-Internal-Api-From'][0])->toBe('core');
         expect($headers['X-Internal-Api-To'][0])->toBe('talk');
 
+
         return true;
     });
 
