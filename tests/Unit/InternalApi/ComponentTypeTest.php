@@ -4,6 +4,18 @@ namespace Hyvor\Internal\Tests\Unit\InternalApi;
 
 use Hyvor\Internal\InternalApi\ComponentType;
 
+it('from config', function() {
+    config(['internal.component' => 'core']);
+    expect(ComponentType::current())->toBe(ComponentType::CORE);
+
+    config(['internal.component' => 'talk']);
+    expect(ComponentType::current())->toBe(ComponentType::TALK);
+
+    config(['internal.component' => 'blogs']);
+    expect(ComponentType::current())->toBe(ComponentType::BLOGS);
+
+});
+
 it('gets core url', function() {
     config(['internal.instance' => 'https://hyvor.com']);
     expect(ComponentType::CORE->getCoreUrl())->toBe('https://hyvor.com');

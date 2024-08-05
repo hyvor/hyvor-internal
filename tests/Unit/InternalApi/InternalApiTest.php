@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Http;
 
 it('calls talk internal API', function() {
 
+    $this->freezeTime();
+
     Http::fake([
         'talk.hyvor.com/api/internal/delete-user' => Http::response(['success' => true], 200)
     ]);
@@ -27,7 +29,14 @@ it('calls talk internal API', function() {
         $message = $request['message'];
         $message = decrypt($message, false);
         $data = json_decode($message, true);
-        expect($data['user_id'])->toBe(123);
+
+        expect($data['data']['user_id'])->toBe(123);
+        expect($data['timestamp'])->toBe(now()->timestamp);
+
+        $headers = $request->headers();
+        expect($headers['X-Internal-Api-From'][0])->toBe('core');
+        expect($headers['X-Internal-Api-To'][0])->toBe('talk');
+
 
         return true;
     });
@@ -40,12 +49,14 @@ it('calls with get', function() {
         'talk.hyvor.com/api/internal/sudo/users*' => Http::response(['success' => true], 200)
     ]);
 
-    InternalApi::call(
+    $response = InternalApi::call(
         ComponentType::TALK,
         InternalApiMethod::GET,
         '/sudo/users',
         ['user_id' => 123]
     );
+
+    expect($response)->toBe(['success' => true]);
 
     Http::assertSent(function ($request) {
         expect($request->url())->toStartWith('https://talk.hyvor.com/api/internal/sudo/users');
@@ -54,7 +65,7 @@ it('calls with get', function() {
         $message = $request['message'];
         $message = decrypt($message, false);
         $data = json_decode($message, true);
-        expect($data['user_id'])->toBe(123);
+        expect($data['data']['user_id'])->toBe(123);
 
         return true;
     });
@@ -75,7 +86,7 @@ it('throws an error if the response fails', function() {
             ['user_id' => 123]
         );
     } catch (InternalApiCallFailedException $e) {
-        expect($e->getMessage())->toBe('Internal API call failed. Status code: 500 - {"success":false}');
+        expect($e->getMessage())->toBe('Internal API call to https://talk.hyvor.com/api/internal/delete-user failed. Status code: 500 - {"success":false}');
         return;
     }
 
@@ -99,7 +110,7 @@ it('throws an error on connection exception', function() {
             ['user_id' => 123]
         );
     } catch (InternalApiCallFailedException $e) {
-        expect($e->getMessage())->toBe('Internal API call failed. Connection error: Connection error');
+        expect($e->getMessage())->toBe('Internal API call to https://talk.hyvor.com/api/internal/delete-user failed. Connection error: Connection error');
         return;
     }
 

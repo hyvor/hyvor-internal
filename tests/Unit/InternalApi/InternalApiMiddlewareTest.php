@@ -11,8 +11,11 @@ it('decrypts message and sets request attributes', function() {
     $request = new \Illuminate\Http\Request();
     $request->replace([
         'message' => Crypt::encryptString(json_encode([
-            'user_id' => 123,
-            'ids' => [1, 2, 3],
+            'data' => [
+                'user_id' => 123,
+                'ids' => [1, 2, 3],
+            ],
+            'timestamp' => time()
         ]))
     ]);
 
@@ -35,6 +38,41 @@ describe('fail', function() {
 
     })->throws(HttpException::class, 'Invalid message');
 
+    it('on missing timestamp', function() {
+
+        $request = new \Illuminate\Http\Request();
+        $request->replace([
+            'message' => Crypt::encryptString(json_encode([
+                'data' => [
+                    'user_id' => 123,
+                    'ids' => [1, 2, 3],
+                ]
+            ]))
+        ]);
+
+        $middleware = new InternalApiMiddleware();
+        $middleware->handle($request, fn() => null);
+
+    })->throws(HttpException::class, 'Invalid timestamp');
+
+    it('on expired message', function() {
+
+        $request = new \Illuminate\Http\Request();
+        $request->replace([
+            'message' => Crypt::encryptString(json_encode([
+                'data' => [
+                    'user_id' => 123,
+                    'ids' => [1, 2, 3],
+                ],
+                'timestamp' => time() - 65
+            ]))
+        ]);
+
+        $middleware = new InternalApiMiddleware();
+        $middleware->handle($request, fn() => null);
+
+    })->throws(HttpException::class, 'Expired message');
+
     it('on invalid message', function() {
 
         $request = new \Illuminate\Http\Request();
@@ -46,6 +84,7 @@ describe('fail', function() {
         $middleware->handle($request, fn() => null);
 
     })->throws(HttpException::class, 'Failed to decrypt message');
+
 
     it('on invalid data', function() {
 
