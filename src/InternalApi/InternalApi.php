@@ -38,7 +38,10 @@ class InternalApi
         $endpoint = ltrim($endpoint, '/');
         $url = ComponentType::getUrlOf($to) . '/api/internal/' . $endpoint;
 
-        $json = json_encode($data);
+        $json = json_encode([
+            'data' => $data,
+            'timestamp' => time(),
+        ]);
         if ($json === false) {
             throw new \Exception('Failed to encode data to JSON');
         }
@@ -51,18 +54,20 @@ class InternalApi
         ];
 
         try {
-            $response = Http::$methodFunction($url, [
-                'message' => $message,
-            ], $headers);
-        } catch (ConnectionException $e) { // @phpstan-ignore-line
+            $response = Http::
+                withHeaders($headers)
+                ->$methodFunction($url, [
+                    'message' => $message,
+                ]);
+        } catch (ConnectionException $e) {
             throw new InternalApiCallFailedException(
-                'Internal API call failed. Connection error: ' . $e->getMessage(),
+                'Internal API call to ' . $url . ' failed. Connection error: ' . $e->getMessage(),
             );
         }
 
         if (!$response->ok()) {
             throw new InternalApiCallFailedException(
-                'Internal API call failed. Status code: ' .
+                'Internal API call to ' . $url . ' failed. Status code: ' .
                 $response->status() . ' - ' .
                 substr($response->body(), 0, 250)
             );

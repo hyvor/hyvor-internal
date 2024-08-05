@@ -32,7 +32,25 @@ class InternalApiMiddleware
             throw new HttpException('Invalid data');
         }
 
-        $request->replace($data);
+        $timestamp = $data['timestamp'] ?? null;
+
+        if (!is_int($timestamp)) {
+            throw new HttpException('Invalid timestamp');
+        }
+
+        $diff = time() - $timestamp;
+
+        if ($diff > 60) {
+            throw new HttpException('Expired message');
+        }
+
+        $requestData = $data['data'] ?? [];
+
+        if (!is_array($requestData)) {
+            throw new HttpException('Invalid data');
+        }
+
+        $request->replace($requestData);
 
         return $next($request);
     }

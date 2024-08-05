@@ -10,6 +10,7 @@ enum ComponentType : string
 
     /**
      * @deprecated
+     * @codeCoverageIgnore
      */
     public static function fromConfig() : self
     {
