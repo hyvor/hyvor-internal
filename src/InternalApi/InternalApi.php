@@ -77,4 +77,19 @@ class InternalApi
 
     }
 
+    public static function messageFromData(array $data) : string
+    {
+
+        $json = json_encode([
+            'data' => $data,
+            'timestamp' => time(),
+        ]);
+        if ($json === false) {
+            throw new \Exception('Failed to encode data to JSON');
+        }
+
+        return Crypt::encryptString($json);
+
+    }
+
 }

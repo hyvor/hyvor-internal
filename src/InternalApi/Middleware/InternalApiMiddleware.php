@@ -4,6 +4,7 @@ namespace Hyvor\Internal\InternalApi\Middleware;
 
 use Closure;
 use Hyvor\Internal\Http\Exceptions\HttpException;
+use Hyvor\Internal\InternalApi\ComponentType;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -13,6 +14,12 @@ class InternalApiMiddleware
 
     public function handle(Request $request, Closure $next) : mixed
     {
+
+        $toHeader = (string) $request->header('X-Internal-Api-To');
+
+        if ($toHeader !== ComponentType::current()->value) {
+            throw new HttpException('Invalid to component', 403);
+        }
 
         $message = $request->input('message');
 

@@ -18,6 +18,7 @@ it('decrypts message and sets request attributes', function() {
             'timestamp' => time()
         ]))
     ]);
+    $request->headers->set('X-Internal-Api-To', 'core');
 
     $middleware = new InternalApiMiddleware();
     $middleware->handle($request, function ($request) {
@@ -30,9 +31,21 @@ it('decrypts message and sets request attributes', function() {
 
 describe('fail', function() {
 
+    it('rejects invalid to component', function() {
+
+        $request = new \Illuminate\Http\Request();
+        $request->headers->set('X-Internal-Api-To', 'talk');
+
+        $middleware = new InternalApiMiddleware();
+        $middleware->handle($request, fn() => null);
+
+    })->throws(HttpException::class, 'Invalid to component', 403);
+
     it('on missing message', function() {
 
         $request = new \Illuminate\Http\Request();
+        $request->headers->set('X-Internal-Api-To', 'core');
+
         $middleware = new InternalApiMiddleware();
         $middleware->handle($request, fn() => null);
 
@@ -49,6 +62,7 @@ describe('fail', function() {
                 ]
             ]))
         ]);
+        $request->headers->set('X-Internal-Api-To', 'core');
 
         $middleware = new InternalApiMiddleware();
         $middleware->handle($request, fn() => null);
@@ -67,6 +81,7 @@ describe('fail', function() {
                 'timestamp' => time() - 65
             ]))
         ]);
+        $request->headers->set('X-Internal-Api-To', 'core');
 
         $middleware = new InternalApiMiddleware();
         $middleware->handle($request, fn() => null);
@@ -79,6 +94,7 @@ describe('fail', function() {
         $request->replace([
             'message' => 'invalid'
         ]);
+        $request->headers->set('X-Internal-Api-To', 'core');
 
         $middleware = new InternalApiMiddleware();
         $middleware->handle($request, fn() => null);
@@ -92,6 +108,7 @@ describe('fail', function() {
         $request->replace([
             'message' => Crypt::encryptString('invalid')
         ]);
+        $request->headers->set('X-Internal-Api-To', 'core');
 
         $middleware = new InternalApiMiddleware();
         $middleware->handle($request, fn() => null);
