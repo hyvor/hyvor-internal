@@ -22,7 +22,7 @@ class I18n
     public function __construct()
     {
 
-        $config = config('hyvor-internal.i18n');
+        $config = config('internal.i18n');
 
         $this->folder = $config['folder'] ?? './locales';
         $this->availableLocales = $this->setAvailableLocales();

@@ -85,7 +85,7 @@ class FakeProvider implements ProviderInterface
 
     public static function getFakeUserId() : ?int
     {
-        $id = config('hyvor-internal.auth.fake.user_id');
+        $id = config('internal.auth.fake.user_id');
         if (is_int($id)) {
             return $id;
         }

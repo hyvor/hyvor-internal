@@ -10,7 +10,7 @@ it('does not add on other domains', function() {
 
     $this->app->register(InternalServiceProvider::class, true);
 
-    config(['hyvor-internal.domain' => 'hyvor.com']);
+    config(['internal.domain' => 'hyvor.com']);
     Route::setRoutes(new RouteCollection());
     (new InternalServiceProvider($this->app))->boot();
 
@@ -23,7 +23,7 @@ it('works with current domain', function() {
 
     $this->app->register(InternalServiceProvider::class, true);
 
-    config(['hyvor-internal.domain' => 'hyvor.com']);
+    config(['internal.domain' => 'hyvor.com']);
     Route::setRoutes(new RouteCollection());
     (new InternalServiceProvider($this->app))->boot();
 

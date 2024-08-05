@@ -13,30 +13,30 @@ use Illuminate\Support\Facades\Http;
 class InternalApi
 {
 
-    public function __construct(public ComponentType $component) {}
-
-    public static function fromConfig() : self
-    {
-        return new self(ComponentType::fromConfig());
-    }
-
     /**
      * @param array<mixed> $data
+     * @param InternalApiMethod|'GET'|'POST' $method
      * @return array<mixed>
      */
-    public function call(
+    public static function call(
         ComponentType $to,
+        InternalApiMethod|string $method,
         /**
          * This is the part after the `/api/internal/` in the URL
-         * ex: set `delete-user` to call `/api/internal/delete-user`
+         * ex: set `/delete-user` to call `/api/internal/delete-user`
          */
         string $endpoint,
         array $data = []
     ) : array
     {
 
+        if (is_string($method)) {
+            $method = InternalApiMethod::from($method);
+        }
+        $methodFunction = strtolower($method->value);
+
         $endpoint = ltrim($endpoint, '/');
-        $url = $this->component->getUrlOf($to) . '/api/internal/' . $endpoint;
+        $url = ComponentType::getUrlOf($to) . '/api/internal/' . $endpoint;
 
         $json = json_encode($data);
         if ($json === false) {
@@ -45,12 +45,15 @@ class InternalApi
 
         $message = Crypt::encryptString($json);
 
+        $headers = [
+            'X-Internal-Api-From' => ComponentType::current()->value,
+            'X-Internal-Api-To' => $to->value,
+        ];
+
         try {
-            $response = Http::post($url, [
-                'from' => $this->component->value,
-                'to' => $to->value,
+            $response = Http::$methodFunction($url, [
                 'message' => $message,
-            ]);
+            ], $headers);
         } catch (ConnectionException $e) { // @phpstan-ignore-line
             throw new InternalApiCallFailedException(
                 'Internal API call failed. Connection error: ' . $e->getMessage(),
@@ -61,7 +64,7 @@ class InternalApi
             throw new InternalApiCallFailedException(
                 'Internal API call failed. Status code: ' .
                 $response->status() . ' - ' .
-                $response->body(),
+                substr($response->body(), 0, 250)
             );
         }
 
