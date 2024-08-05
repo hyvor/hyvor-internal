@@ -8,16 +8,16 @@ use Illuminate\Http\RedirectResponse;
 it('checks', function() {
     expect(Auth::check()->id)->toBe(1);
 
-    config(['hyvor-internal.auth.fake.user_id' => 2]);
+    config(['internal.auth.fake.user_id' => 2]);
     expect(Auth::check()->id)->toBe(2);
 
-    config(['hyvor-internal.auth.fake.user_id' => null]);
+    config(['internal.auth.fake.user_id' => null]);
     expect(Auth::check())->toBeFalse();
 });
 
 it('redirects', function() {
 
-    config(['hyvor-internal.auth.provider' => 'hyvor']);
+    config(['internal.auth.provider' => 'hyvor']);
 
     $login = Auth::login();
     expect($login)->toBeInstanceOf(RedirectResponse::class);

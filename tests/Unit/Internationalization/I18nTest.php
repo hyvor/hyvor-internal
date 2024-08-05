@@ -6,7 +6,7 @@ use Hyvor\Internal\Internationalization\I18n;
 use RuntimeException;
 
 beforeEach(function() {
-    config(['hyvor-internal.i18n.folder' => __DIR__ . '/locales']);
+    config(['internal.i18n.folder' => __DIR__ . '/locales']);
 });
 
 it('i18n works', function() {

@@ -24,7 +24,7 @@ class HyvorApiCaller
         $endpoint = ltrim($endpoint, '/');
         $headers['X-Signature'] = encrypt(json_encode($data));
 
-        $hyvorApiUrl = config('hyvor-internal.auth.hyvor.private_url') ?? ComponentType::fromConfig()->getCoreUrl();
+        $hyvorApiUrl = config('internal.auth.hyvor.private_url') ?? ComponentType::fromConfig()->getCoreUrl();
 
         return Http::withHeaders($headers)
             ->asJson()

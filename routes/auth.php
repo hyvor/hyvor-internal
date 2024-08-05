@@ -3,7 +3,7 @@
 use Hyvor\Internal\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
-if (config('hyvor-internal.auth.routes')) {
+if (config('internal.auth.routes')) {
     Route::post('/api/auth/check', [AuthController::class, 'check']);
     Route::get('/api/auth/login', [AuthController::class, 'login']);
     Route::get('/api/auth/signup', [AuthController::class, 'signup']);

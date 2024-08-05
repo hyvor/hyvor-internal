@@ -10,6 +10,12 @@ return [
     'domain' => env('APP_DOMAIN', '{any}'),
 
     /**
+     * Instance URL
+     * Where is the core component running?
+     */
+    'instance' => env('HYVOR_INSTANCE', 'https://hyvor.com'),
+
+    /**
      * Which component is this?
      * See `src/InternalApi/ComponentType.php` for available components
      *

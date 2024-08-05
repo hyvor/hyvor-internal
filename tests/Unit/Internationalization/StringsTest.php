@@ -6,7 +6,7 @@ use Hyvor\Internal\Internationalization\Exceptions\InvalidStringKeyException;
 use Hyvor\Internal\Internationalization\Strings;
 
 beforeEach(function() {
-    config(['hyvor-internal.i18n.folder' => __DIR__ . '/locales']);
+    config(['internal.i18n.folder' => __DIR__ . '/locales']);
 });
 
 it('gets strings default', function() {

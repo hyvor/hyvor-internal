@@ -6,7 +6,7 @@ use Hyvor\Internal\Internationalization\ClosestLocale;
 use function Pest\testDirectory;
 
 beforeEach(function() {
-    config(['hyvor-internal.i18n.folder' => __DIR__ . '/locales']);
+    config(['internal.i18n.folder' => __DIR__ . '/locales']);
 });
 
 it('gets the closest locale', function() {

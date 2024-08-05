@@ -8,15 +8,24 @@ enum ComponentType : string
     case TALK = 'talk';
     case BLOGS = 'blogs';
 
+    /**
+     * @deprecated
+     */
     public static function fromConfig() : self
     {
-        $config = config('hyvor-internal.component');
+        $config = config('internal.component');
+        return self::from($config);
+    }
+
+    public static function current() : self
+    {
+        $config = config('internal.component');
         return self::from($config);
     }
 
     public function getCoreUrl() : string
     {
-        $currentUrl = config('app.url');
+        $currentUrl = config('internal.instance');
 
         if ($this === ComponentType::CORE) {
             return $currentUrl;
@@ -32,7 +41,7 @@ enum ComponentType : string
         }
     }
 
-    public function getUrlOf(self $type) : string
+    public function getUrlOfFrom(self $type) : string
     {
 
         $coreUrl = $this->getCoreUrl();
@@ -50,6 +59,11 @@ enum ComponentType : string
 
         }
 
+    }
+
+    public static function getUrlOf(self $type) : string
+    {
+        return self::current()->getUrlOfFrom($type);
     }
 
 }
