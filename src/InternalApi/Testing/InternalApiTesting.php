@@ -16,7 +16,6 @@ class InternalApiTesting
     /**
      * @param array<mixed> $data
      * @param InternalApiMethod|'GET'|'POST' $method
-     * @return array<mixed>
      */
     public static function call(
         InternalApiMethod|string $method,
@@ -38,6 +37,7 @@ class InternalApiTesting
             throw new \Exception('test() function of PestPHP not found');
         }
 
+        /** @var mixed $test */
         $test = test();
         $endpoint = ltrim($endpoint, '/');
 

@@ -15,9 +15,12 @@ class InternalApiMiddleware
     public function handle(Request $request, Closure $next) : mixed
     {
 
-        $toHeader = (string) $request->header('X-Internal-Api-To');
+        $toHeader = $request->header('X-Internal-Api-To');
 
-        if ($toHeader !== ComponentType::current()->value) {
+        if (
+            !is_string($toHeader) ||
+            $toHeader !== ComponentType::current()->value
+        ) {
             throw new HttpException('Invalid to component', 403);
         }
 

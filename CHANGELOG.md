@@ -1,3 +1,6 @@
+## 1.1.x - 2024-08-05
+- Added InternalAPI caller, middleware, and testing helpers
+
 ## 0.0.11 - 2024-02-26
 - Strings constructor locale is nullable
 

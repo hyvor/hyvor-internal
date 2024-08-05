@@ -38,15 +38,7 @@ class InternalApi
         $endpoint = ltrim($endpoint, '/');
         $url = ComponentType::getUrlOf($to) . '/api/internal/' . $endpoint;
 
-        $json = json_encode([
-            'data' => $data,
-            'timestamp' => time(),
-        ]);
-        if ($json === false) {
-            throw new \Exception('Failed to encode data to JSON');
-        }
-
-        $message = Crypt::encryptString($json);
+        $message = self::messageFromData($data);
 
         $headers = [
             'X-Internal-Api-From' => ComponentType::current()->value,
@@ -77,6 +69,10 @@ class InternalApi
 
     }
 
+    /**
+     * @param array<mixed> $data
+     * @throws \Exception
+     */
     public static function messageFromData(array $data) : string
     {
 

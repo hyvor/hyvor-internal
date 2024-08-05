@@ -9,12 +9,16 @@ class InternalApiFromMiddleware
 {
 
 
-    public function handle(Request $request, \Closure $next, string $input)
+    public function handle(Request $request, \Closure $next, string $input) : mixed
     {
 
         $from = ComponentType::from($input);
 
-        $fromHeader = (string) $request->header('X-Internal-Api-From');
+        $fromHeader = $request->header('X-Internal-Api-From');
+
+        if (!$fromHeader) {
+            abort(403, 'Missing from component');
+        }
 
         if ($fromHeader !== $from->value) {
             abort(403, 'Invalid from component');
